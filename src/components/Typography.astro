@@ -1,0 +1,99 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+type Variants =
+  (
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'p'
+    | 'span'
+  ) &
+  HTMLTag
+
+type Weigth =
+  | 'regular'
+  | 'medium'
+  | 'semibold'
+  | 'bold'
+
+type Props<Tag extends Variants> = Polymorphic<{
+  as: Tag,
+  accent?: boolean,
+  weight?: Weigth
+}>
+
+const {
+  as: Tag,
+  accent,
+  weight,
+  ...props
+} = Astro.props
+
+---
+
+<Tag
+  {...props}
+  class:list={[
+    Tag,
+    weight,
+    { accent }
+  ]}
+>
+  <slot />
+</Tag>
+
+<style lang="scss">
+  /* Apply Lora font only to h1 and h2, the remainder uses Quicksand */
+  @for $i from 1 through 5 {
+    h#{$i} {
+      @if $i > 2 {
+        font-family: $quicksand;
+      } @else {
+        font-family: $lora;
+      }
+    }
+  }
+
+  h1, .h1 {
+    font-size: rem(48);
+  }
+
+  h2, .h2 {
+    font-size: rem(36);
+  }
+
+  h3, .h3 {
+    font-size: rem(24);
+  }
+
+  p, .p {
+    font-family: $quicksand;
+    font-size: rem(16);
+  }
+
+  /* Utility typography classes */
+
+  .accent {
+    color: $accents-gray;
+  }
+
+  .regular {
+    font-weight: 400;
+  }
+
+  .medium {
+    font-weight: 500;
+  }
+
+  .semibold {
+    font-weight: 600;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+</style>

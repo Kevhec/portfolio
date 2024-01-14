@@ -1,0 +1,60 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  onlyIcon?: boolean,
+  newTab?: boolean,
+}
+
+const { href, onlyIcon, newTab, ...attrs } = Astro.props;
+---
+
+<a
+  href={href}
+  {...attrs}
+  class:list={["button", {'button--onlyIcon': onlyIcon}]}
+  target={newTab && "_blank" || "_self"}
+  rel={newTab && "noreferrer" || null}
+>
+  <span class="button__span" />
+  <slot />
+</a>
+
+<style lang="scss">
+  .button {
+    mask-position: relative;
+    overflow: hidden;
+
+    &:not(.button--onlyIcon) {
+      padding: rem(8) rem(16);
+      border: 1px solid $primary-light-beige;
+      border-radius: 9999px;
+      font-family: $lora;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      color: $primary-light-beige;
+    }
+
+    &__span {
+      border-radius: 50%;
+      position: absolute;
+      @include size(0);
+      transform: translate(-50%, -50%);
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll(".button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("mouseenter", (evt) => {
+      console.log("in")
+    })
+
+    button.addEventListener("mouseleave", (evt) => {
+      console.log("out")
+    })
+  });
+</script>
