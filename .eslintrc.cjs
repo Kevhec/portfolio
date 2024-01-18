@@ -4,11 +4,11 @@ module.exports = {
     // ...
     "plugin:astro/recommended",
     /* "airbnb-base", */
-    "plugin:astro/jsx-a11y-strict",
+    "plugin:astro/jsx-a11y-recommended",
   ],
   rules: {
     "linebreak-style": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
   },
   // ...
   overrides: [

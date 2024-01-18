@@ -29,6 +29,7 @@ const t = useTranslations(lang);
       </Typography>
       <div class="introduction__buttons">
         <Button
+          as='a'
           href=`
             mailto:kevhec.dev@gmail.com?subject=${t('intro.getintouch.subject')}&body=${t('intro.getintouch.message')}
           `
@@ -37,6 +38,7 @@ const t = useTranslations(lang);
           {t('intro.getintouch')}
         </Button>
         <Button
+          as='a'
           href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
           newTab
           onlyIcon
@@ -48,6 +50,7 @@ const t = useTranslations(lang);
           <p class="visually-hidden">{t('intro.linkedinlabel')}</p>
         </Button>
         <Button
+          as='a'
           href="https://github.com/Kevhec"
           newTab
           onlyIcon

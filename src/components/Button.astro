@@ -1,18 +1,32 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
-interface Props extends HTMLAttributes<'a'> {
+type Variants =
+  (
+    | 'a'
+    | 'button'
+  ) &
+  HTMLTag
+
+type Props<Tag extends Variants> = Polymorphic<{
+  as: Tag,
+  href?: string
   onlyIcon?: boolean,
   newTab?: boolean,
   positionAware?: boolean
-}
+}>
 
 const {
-  href, onlyIcon, newTab, positionAware, ...attrs
+  as: Tag,
+  href,
+  onlyIcon,
+  newTab,
+  positionAware,
+  ...attrs
 } = Astro.props;
 ---
 
-<a
+<Tag
   href={href}
   {...attrs}
   class:list={[
@@ -27,7 +41,7 @@ const {
 >
   <span class="button__span" />
   <slot />
-</a>
+</Tag>
 
 <style lang="scss">
   .button {

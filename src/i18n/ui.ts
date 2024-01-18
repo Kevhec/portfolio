@@ -19,6 +19,7 @@ export const defaultLang = 'en';
 
 export const ui: UI = {
   en: {
+    'langselect.label': 'Select language',
     'intro.greet': "Hey! it's",
     'intro.name': 'Kevin Henao',
     'intro.introduction.1': 'Frontend Developer',
@@ -39,6 +40,7 @@ export const ui: UI = {
     'about.8': 'to enhance the web and make it a more user-friendly space',
   },
   es: {
+    'langselect.label': 'Seleccionar idioma',
     'intro.greet': '¡Hey! aquí',
     'intro.introduction.1': 'Desarrollador Frontend',
     'intro.introduction.2': 'Aspirante a defensor de la accesibilidad',

@@ -1,30 +1,277 @@
 ---
 import { languages } from '@i18n/ui';
-const path = Astro.url.pathname
-const noLangPath = path.split('/').slice(2).join('/')
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import Button from './Button.astro';
+
+const url = Astro.url;
+
+const noLangPath = url.pathname.split('/').slice(2).join('/')
+const pageLang = getLangFromUrl(url);
+const t = useTranslations(pageLang);
+
+const orderedLanguages = Object.entries(languages).sort((a, b) => {
+  if (a[0].toString() === pageLang) return 1;
+  if (b[0].toString() === pageLang) return -1;
+  return 0;
+})
 ---
 
-<ul>
-  {Object.entries(languages).map(([lang, label]) => (
-    <li>
-      <a href={`/${lang}/${noLangPath}`}>{label}</a>
-    </li>
-  ))}
-</ul>
+<div class="language-picker" data-lang={pageLang}>
+  <form class="language-picker__form">
+    <Button
+      as="button"
+      positionAware
+      role="combobox"
+      id="select"
+      value="Select"
+      aria-controls="listbox"
+      aria-haspopup="listbox"
+      aria-label={t('langselect.label')}
+      tabindex="0"
+      aria-expanded="false"
+      class="language-picker__button"
+      type="button"
+      style={`
+        border: none;
+        background-color: unset;
+        font-family: 'Quicksand', sans-serif;
+        color: $neutral-white;
+        padding: 0;
+        margin-bottom: 8px;
+        width: 100%;
+        transition: background-color 200ms ease-in-out;`
+      }
+    >
+      {languages[pageLang]}
+    </Button>
+    <div class="language-picker__dropdown">
+      <div class="language-picker__list" role="listbox" id="listbox">
+        {orderedLanguages.map(([lang, label]) => (
+          <a
+            role="option"
+            aria-selected={lang === pageLang ? 'true' : 'false'}
+            href={`/${lang}/${noLangPath}`}
+            class:list={[
+              "language-picker__item",
+              {"language-picker__item--active": lang === pageLang}
+            ]}
+            tabindex="-1"
+          >
+              {label}
+            </a>
+        ))}
+      </div>
+    </div>
+  </form>
+</div>
 
 <style lang="scss">
-  ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    gap: 8px;
-    
-    a {
+  .language-picker {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    z-index: 5555;
+
+    &__button {
+      border: none;
+      background-color: unset;
+      font-family: $quicksand;
+      color: $neutral-white;
+      padding: 0;
+      margin-bottom: 8px;
+      width: 100%;
+      transition: background-color 200ms ease-in-out;
+
+      &:focus {
+        background-color: rgba(225, 230, 224, 0.2);
+      }
+    }
+
+    &__dropdown {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 250ms ease, outline-color 250ms ease;
+      outline-color: rgba(225, 230, 224, 0);
+      padding: 8px;
+      position: relative;
+      border-radius: calc(2px + 8px);
+      &--hasDropdown {
+        grid-template-rows: 1fr;
+        outline: 1px solid rgba(225, 230, 224, 0.2);
+      }
+
+      &::before {
+        $elementWidth: 20px;
+        $elementHeight: calc($elementWidth / 2);
+        content: "";
+        width: $elementWidth;
+        height: $elementHeight;
+        position: absolute;
+        top: -$elementHeight;
+      }
+    }
+    &__list {
+      list-style-type: none;
+      padding: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow: hidden;
+    }
+
+    &__item {
+      width: 100%;
       color: $neutral-white;
       text-decoration: none;
       font-family: $quicksand;
+      padding: 4px 8px;
+      transition: background-color 200ms ease-in-out;
+      text-align: center;
+      overflow: hidden;
+
+      &:focus {
+        outline: none;
+        border-radius: 2px;
+        background-color: rgba(225, 230, 224, 0.3);
+      }
+
+      &:hover {
+        background-color: rgba(225, 230, 224, 0.2);
+      }
+    }
+  }
+</style>
+
+<script>
+  const $ = <T extends HTMLElement>(selector: string) => {
+    return document.querySelector<T>(selector)
+  }
+
+  const $$ = <T extends HTMLElement>(selector: string) => {
+    return document.querySelectorAll<T>(selector)
+  }
+
+  const [
+    langSelectButton,
+    dropdown,
+    options,
+  ] = [
+    $<HTMLButtonElement>('[role="combobox"]'),
+    $<HTMLDivElement>('.language-picker__dropdown'),
+    $$<HTMLLIElement>('[role="option"]'),
+  ];
+
+  // Current state
+  let hasDropdown = false;
+  let currentOptionIndex = 0;
+
+  const toggleDropdown = (evt?: MouseEvent) => {
+    // Stop propagation for document click event
+    if (evt) {
+      evt.stopPropagation();
+    }
+    // Toggle dropdown
+    hasDropdown = !hasDropdown;
+
+    dropdown?.classList.toggle('language-picker__dropdown--hasDropdown');
+    langSelectButton?.setAttribute('aria-expanded', hasDropdown.toString())
+    
+    if (hasDropdown) {
+      // Auto focus current option on dropdown
+      focusCurrentOption();
+    } else {
+      // Focus toggle button on dropdown close
+      langSelectButton?.focus();
     }
   }
 
+  const handleKeyPress = (evt: KeyboardEvent) => {
+    // As button is in a form, this helps prevent submit behavior
+    // This was maintaind even with type=button on the element just in case
+    evt.preventDefault();
+    const { key } = evt;
+    const openKeys = ['ArrowUp', 'ArrowDown', 'Enter', ' '];
 
-</style>
+    // Toggle dropdown when openkey is pressed and it is closed
+    if (!hasDropdown && openKeys.includes(key)) {
+      toggleDropdown();
+    } else if (hasDropdown) {
+      // Handle key interactions when dropdown is open
+      switch (key) {
+        case 'Escape':
+          toggleDropdown();
+          break
+        case 'ArrowDown':
+          moveFocusDown();
+          break
+        case 'ArrowUp':
+          moveFocusUp();
+          break
+        case 'Enter':
+        case ' ':
+          selectCurrentOption();
+          break
+        default:
+          break
+      }
+    }
+  }
+
+  // Focus current option as tab index is not available for this component
+  // This allows better control of items
+  const focusCurrentOption = () => {
+    const currentOption = options[currentOptionIndex] as HTMLElement;
+    currentOption.focus();
+  }
+
+  const moveFocusDown = () => {
+    // Move down until bottom reached, then go to first option
+    if (currentOptionIndex < options.length - 1) {
+      currentOptionIndex++;
+    } else {
+      currentOptionIndex = 0;
+    }
+
+    focusCurrentOption();
+  }
+
+  const moveFocusUp = () => {
+    // Move up until top reached, then go to last option
+    if (currentOptionIndex > 0) {
+      currentOptionIndex--;
+    } else {
+      currentOptionIndex = options.length - 1;
+    }
+
+    focusCurrentOption();
+  }
+
+  // Handle interaction with anchors
+  const selectCurrentOption = () => {
+    const selectedOption = options[currentOptionIndex];
+    selectedOption.click();
+  }
+
+  const handleDocumentInteraction = (evt: MouseEvent) => {
+    const target = evt.target as Node;
+    if (!target) return
+
+    // Check if document click was on some select's element
+    const wasButtonClicked = langSelectButton?.contains(target);
+    const wasDropdownClicked = dropdown?.contains(target);
+
+    // If click is in button or is outside of entire component while is open
+    // close it
+    if (wasButtonClicked || (!wasDropdownClicked && hasDropdown)) {
+      toggleDropdown();
+    }
+  }
+
+  langSelectButton?.addEventListener('keydown', handleKeyPress)
+  langSelectButton?.addEventListener('click', toggleDropdown)
+  options.forEach((option) => {
+    option.addEventListener('keydown', handleKeyPress);
+  })
+  document.addEventListener('click', handleDocumentInteraction)
+</script>
