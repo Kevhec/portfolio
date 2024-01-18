@@ -1,4 +1,7 @@
 ---
+import Container from '@components/Container.astro';
+import LanguagePicker from '@components/LanguagePicker.astro';
+
 interface Props {
 	title: string;
 }
@@ -15,22 +18,33 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+    <slot name="additional-meta-head-info" />
 	</head>
 	<body>
-    <div class="container">
-      <slot />
-    </div>
+    <header>
+      <Container>
+        <div class="languagepicker">
+          <LanguagePicker />
+        </div>
+      </Container>
+    </header>
+    <slot />
 	</body>
 </html>
-<style lang="scss">
+<style lang="scss" is:global>
   body {
-    background: url(/background-noise.png), $primary-green;
+    background: url(/images/background-noise.png), $primary-green;
     color: $primary-light-beige;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .container {
     width: 80%;
     margin-inline: auto;
+  }
+
+  .languagepicker {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>

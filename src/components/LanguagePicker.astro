@@ -1,0 +1,30 @@
+---
+import { languages } from '@i18n/ui';
+const path = Astro.url.pathname
+const noLangPath = path.split('/').slice(2).join('/')
+---
+
+<ul>
+  {Object.entries(languages).map(([lang, label]) => (
+    <li>
+      <a href={`/${lang}/${noLangPath}`}>{label}</a>
+    </li>
+  ))}
+</ul>
+
+<style lang="scss">
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    
+    a {
+      color: $neutral-white;
+      text-decoration: none;
+      font-family: $quicksand;
+    }
+  }
+
+
+</style>

@@ -1,0 +1,62 @@
+---
+import Typography from '@components/Typography.astro';
+import { Image } from 'astro:assets';
+import portrait from '@assets/images/portrait.png';
+import Container from '@components/Container.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="about">
+  <Container>
+    <div class="about__content">
+      <figure class="about__portrait">
+        <Image src={portrait} alt="My portrait" />
+      </figure>
+      <div class="about__text">
+        <Typography as='p' >
+          {t('about.1')}<Typography as='span' weight='bold'>{t('about.2')}</Typography>{t('about.3')}<Typography as='span' weight='bold'>{t('about.4')}</Typography>{t('about.5')}<Typography as='span' weight='bold'>{t('about.6')}</Typography>{t('about.7')}<Typography as='span' weight='bold'>{t('about.8')}</Typography>
+        </Typography>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style lang="scss">
+  .about {
+    background-color: $neutral-white;
+    &__content {
+      display: grid;
+      place-items: center;
+      padding: rem(56) 0;
+      gap: rem(64);
+
+      @include mediaq($bp-small-pc) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &__portrait {
+      display: none;
+      background-color: $primary-green;
+      padding: rem(32);
+      border-radius: 44444px;
+      height: 100%;
+      aspect-ratio: 1/1;
+      justify-self: start;
+
+      @include mediaq($bp-small-pc) {
+        display: grid;
+        place-items: center;
+      }
+    }
+
+    &__text {
+      width: 90%;
+      color: $primary-green;
+      justify-self: end;
+    }
+  }
+</style>

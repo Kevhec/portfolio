@@ -1,10 +1,15 @@
-export default {
+module.exports = {
   // ...
   extends: [
     // ...
     "plugin:astro/recommended",
-    "plugin:astro/jsx-a11y-recommended"
+    /* "airbnb-base", */
+    "plugin:astro/jsx-a11y-strict",
   ],
+  rules: {
+    "linebreak-style": "off",
+    "import/no-unresolved": "off"
+  },
   // ...
   overrides: [
     {
@@ -18,11 +23,21 @@ export default {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
       },
+      processor: "astro/client-side-ts",
       rules: {
         // override/add rules settings here, such as:
         // "astro/no-set-html-directive": "error"
+        "import/prefer-default-export": "off"
+      },
+    },
+    {
+      files: ["*.ts"],
+      extends: ["plugin:@typescript-eslint/recommended"],
+      parserOptions: {
+        sourceType: "module",
+        ecmaVersion: 2015
       },
     },
     // ...
   ],
-}
+};

@@ -1,0 +1,31 @@
+---
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '@i18n/utils'
+import _slug_ from 'src/pages/[lang]/project/[slug].astro';
+import { Image } from 'astro:assets';
+
+const pageLang = getLangFromUrl(Astro.url);
+
+const projects = await getCollection('projects', ({ slug }) => {
+  const [projectLang, _] = slug.split('/');
+  return projectLang === pageLang;
+});
+---
+
+<ul>
+  {
+    projects.map((project) => (
+      <li>
+        <a href={`/${pageLang}/project/${project.slug.split('/').slice(1)}`}>
+          <Image
+            src={project.data.mockup.src}
+            alt={project.data.mockup.alt}
+            width={200}
+            height={200}
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>

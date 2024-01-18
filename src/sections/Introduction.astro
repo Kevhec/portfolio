@@ -4,47 +4,67 @@ import Sunflower from '../components/Sunflower.astro';
 import Button from '../components/Button.astro';
 import LinkedinIcon from '../components/icons/LinkedinIcon.astro';
 import GithubIcon from '../components/icons/GithubIcon.astro';
+import Container from '@components/Container.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section class="introduction">
-  <div class="introduction__content">
-    <Typography as="h1" weight="regular">
-      <Typography as="span" class="introduction__upper-line">
-        Hey! it's
+<Container>
+  <section class="introduction">
+    <div class="introduction__content">
+      <Typography as="h1" weight="regular">
+        <Typography as="span" class="introduction__upper-line">
+          {t('intro.greet')}
+        </Typography>
+        <Typography as="span" accent weight="semibold" class="introduction__bottom-line">
+          {t('intro.name')}
+        </Typography>
       </Typography>
-      <Typography as="span" accent weight="semibold" class="introduction__bottom-line">
-        Kevin Henao
+      <Typography as="p">
+        {t('intro.introduction.1')},<br>
+        {t('intro.introduction.2')},<br>
+        {t('intro.introduction.3')}<br>
       </Typography>
-    </Typography>
-    <Typography as="p">
-      Frontend Developer,<br>
-      Aspiring Accessibility Advocate,<br>
-      Learning Enthusiast.<br>
-    </Typography>
-    <div class="introduction__buttons">
-      <Button href="#">
-        Get in touch
-      </Button>
-      <Button
-        href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
-        newTab
-        onlyIcon
-      >
-        <LinkedinIcon />  
-      </Button>
-      <Button
-        href="https://github.com/Kevhec"
-        newTab
-        onlyIcon
-      >
-        <GithubIcon />
-      </Button>
+      <div class="introduction__buttons">
+        <Button
+          href=`
+            mailto:kevhec.dev@gmail.com?subject=${t('intro.getintouch.subject')}&body=${t('intro.getintouch.message')}
+          `
+          positionAware
+        >
+          {t('intro.getintouch')}
+        </Button>
+        <Button
+          href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
+          newTab
+          onlyIcon
+          aria-label={t('intro.linkedinlabel')}
+        >
+          <figure aria-hidden="true">
+            <LinkedinIcon />  
+          </figure>
+          <p class="visually-hidden">{t('intro.linkedinlabel')}</p>
+        </Button>
+        <Button
+          href="https://github.com/Kevhec"
+          newTab
+          onlyIcon
+          aria-label={t('intro.githublabel')}
+        >
+          <figure aria-hidden="true">
+            <GithubIcon />
+          </figure>
+          <p class="visually-hidden">{t('intro.githublabel')}</p>
+        </Button>
+      </div>
     </div>
-  </div>
-  <div class="sunflower">
-    <Sunflower />
-  </div>
-</section>
+    <div class="sunflower">
+      <Sunflower />
+    </div>
+  </section>
+</Container>
 
 <style lang="scss">
   .introduction {
@@ -61,13 +81,17 @@ import GithubIcon from '../components/icons/GithubIcon.astro';
       position: relative;
 
       &::after {
+        display: none;
         content: "";
         @include sunflowerProps();
-        display: block;
         position: absolute;
         transform: scale(.7);
         top: -110%;
-        right: -85%;
+        right: rem(-150);
+        
+        @include mediaq($bp-phone) {
+          display: block;
+        }
 
         @include mediaq($bp-small-pc) {
           display: none;
