@@ -1,0 +1,71 @@
+---
+title: 'Project - Ejepets'
+excerpt: 'Do cupidatat ullamco veniam ad in laborum velit dolor excepteur adipisicing Lorem duis id. Non adipisicing reprehenderit cupidatat culpa qui commodo quis'
+mockup: {
+  src: 'http://placekitten.com/200/300',
+  alt: 'A kitten'
+}
+demoLink: '#'
+---
+
+import { Image } from 'astro:assets';
+import Description from '@components/projectPage/Description.astro';
+import Typography from '@components/Typography.astro';
+import Button from '@components/Button.astro';
+
+export const components = {
+  h1: (props) => <Typography as="h2" {...props} />,
+  h2: (props) => <Typography as="h3" {...props} />,
+  h3: (props) => <Typography as="h4" {...props} />,
+  p: (props) => <Typography as="p" {...props} />,
+}
+export const wasForAClient = true;
+
+export const {
+  title,
+  excerpt,
+  mockup,
+  demoLink,
+} = frontmatter
+
+<Description>
+  <Image
+    src={mockup.src}
+    alt={mockup.alt}
+    width={200}
+    height={200}
+    slot="image"
+    class="project__image"
+  />
+  <Fragment slot="content">
+    <div>
+      <Typography as="p" class="semibold">
+        { wasForAClient ? "Client" : "Personal" }
+      </Typography>
+      This personal project was lead by love for our pets, the goal is to provide an easy way to reach those business that offer services for our best friends, all in one place.
+      <Button
+        as="a"
+        textOnly
+        href={demoLink}
+        style="margin-top: 16px; display: block;"
+      >
+        Demo
+      </Button>
+    </div>
+    <div>
+      <Typography as="p" class="semibold">
+        {"Technologies"}
+      </Typography>
+      
+      - Next.js
+      - React
+      - Tailwind CSS
+      - Firebase
+      - Leaflet
+    </div>
+  </Fragment>
+</Description>
+
+Fugiat ea proident adipisicing dolore nisi magna. Ea aliqua nisi proident id quis eiusmod. Do sit ex nostrud eu esse. Mollit in ad excepteur aliqua et nostrud ea consequat laborum voluptate. Ullamco est fugiat duis reprehenderit mollit exercitation laborum minim. Consectetur voluptate irure voluptate ullamco eiusmod quis et. Eu sunt sunt consectetur nisi eu deserunt fugiat consequat.
+
+Anim Lorem incididunt ea cillum mollit quis nisi et aliqua commodo aute. Ex magna irure magna nisi. Elit pariatur ipsum do incididunt culpa. Eu anim aliquip anim laboris ea pariatur ut qui velit aliqua.

@@ -1,5 +1,6 @@
 ---
 import Container from '@components/Container.astro';
+import Typography from '@components/Typography.astro';
 import Layout from '@layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
@@ -27,13 +28,7 @@ const { Content } = await page.render();
 ---
 <Layout title={page.data.title}>
   <Container>
-    <h1>{page.data.title}</h1>
-    <Image
-    src={page.data.mockup.src}
-    alt={page.data.mockup.alt}
-    width={200}
-    height={200}
-    />
+    <Typography as='h1'>{page.data.title}</Typography>
     <Content />
   </Container>
 </Layout>

@@ -11,7 +11,8 @@ type Variants =
 type Props<Tag extends Variants> = Polymorphic<{
   as: Tag,
   href?: string
-  onlyIcon?: boolean,
+  iconOnly?: boolean,
+  textOnly?: boolean,
   newTab?: boolean,
   positionAware?: boolean
 }>
@@ -19,8 +20,9 @@ type Props<Tag extends Variants> = Polymorphic<{
 const {
   as: Tag,
   href,
-  onlyIcon,
+  iconOnly,
   newTab,
+  textOnly,
   positionAware,
   ...attrs
 } = Astro.props;
@@ -32,14 +34,15 @@ const {
   class:list={[
     'button',
     {
-      'button--onlyIcon': onlyIcon,
+      'button--iconOnly': iconOnly,
       'button--positionAware': positionAware,
+      'button--textOnly': textOnly,
     },
   ]}
   target={newTab ? '_blank' : '_self'}
   rel={newTab ? 'noreferrer' : null}
 >
-  <span class="button__span" />
+  {positionAware && <span class="button__span" />}
   <slot />
 </Tag>
 
@@ -47,16 +50,16 @@ const {
   .button {
     position: relative;
     overflow: hidden;
+    font-family: $lora;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: $primary-light-beige;
 
-    &:not(.button--onlyIcon) {
+    &:not(.button--iconOnly):not(.button--textOnly) {
       padding: rem(8) rem(16);
       border: 1px solid $primary-light-beige;
       border-radius: 9999px;
-      font-family: $lora;
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      color: $primary-light-beige;
     }
 
     &:hover {

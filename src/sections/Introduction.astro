@@ -31,35 +31,35 @@ const t = useTranslations(lang);
         <Button
           as='a'
           href=`
-            mailto:kevhec.dev@gmail.com?subject=${t('intro.getintouch.subject')}&body=${t('intro.getintouch.message')}
+            mailto:kevhec.dev@gmail.com?subject=${t('intro.getInTouch.subject')}&body=${t('intro.getInTouch.message')}
           `
           positionAware
         >
-          {t('intro.getintouch')}
+          {t('intro.getInTouch')}
         </Button>
         <Button
           as='a'
           href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
           newTab
-          onlyIcon
-          aria-label={t('intro.linkedinlabel')}
+          iconOnly
+          aria-label={t('intro.linkedIn.label')}
         >
           <figure aria-hidden="true">
             <LinkedinIcon />  
           </figure>
-          <p class="visually-hidden">{t('intro.linkedinlabel')}</p>
+          <p class="visually-hidden">{t('intro.linkedIn.label')}</p>
         </Button>
         <Button
           as='a'
           href="https://github.com/Kevhec"
           newTab
-          onlyIcon
-          aria-label={t('intro.githublabel')}
+          iconOnly
+          aria-label={t('intro.github.label')}
         >
           <figure aria-hidden="true">
             <GithubIcon />
           </figure>
-          <p class="visually-hidden">{t('intro.githublabel')}</p>
+          <p class="visually-hidden">{t('intro.github.label')}</p>
         </Button>
       </div>
     </div>
