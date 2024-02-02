@@ -4,8 +4,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kevhec.github.io',
-  base: '/portfolio',
+  site: 'https://kevhec.dev/',
   vite: {
     css: {
       preprocessorOptions: {
