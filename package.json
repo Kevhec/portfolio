@@ -13,7 +13,8 @@
   "dependencies": {
     "@astrojs/mdx": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "astro": "^4.1.1"
+    "astro": "^4.1.1",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
