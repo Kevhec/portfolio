@@ -1,18 +1,24 @@
 ---
 interface Props {
   classes?: string
+  relative?: boolean
 }
 
-const { classes } = Astro.props;
+const { classes, relative } = Astro.props;
 ---
 
-<div class:list={classes}>
+<div class:list={[ classes, { relative } ]}>
   <slot />
 </div>
 
 <style>
   div {
     width: 80%;
+    max-width: 1140px;
     margin-inline: auto;
+  }
+
+  .relative {
+    position: relative;
   }
 </style>

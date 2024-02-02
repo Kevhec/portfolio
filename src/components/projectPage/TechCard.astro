@@ -1,0 +1,111 @@
+---
+import Typography from '@components/Typography.astro';
+import javaScriptIcon from '@assets/icons/javascript.svg';
+import sassIcon from '@assets/icons/sass.svg';
+import gitIcon from '@assets/icons/git.svg';
+import nextJSIcon from '@assets/icons/nextjs.svg';
+import typeScriptIcon from '@assets/icons/typescript.svg';
+import tailwindIcon from '@assets/icons/tailwindcss.svg';
+import reactIcon from '@assets/icons/react.svg';
+import firebaseIcon from '@assets/icons/firebase.svg';
+import leafletIcon from '@assets/icons/leaflet.svg';
+import { Image } from 'astro:assets';
+
+type TechsList =
+  | 'React'
+  | 'JavaScript'
+  | 'TypeScript'
+  | 'Next.js'
+  | 'Tailwind CSS'
+  | 'Git'
+  | 'Sass'
+  | 'Firebase'
+  | 'Leaflet'
+
+interface Props {
+  tech: TechsList
+}
+
+const { tech } = Astro.props;
+
+const techsIconMapping = {
+  JavaScript: javaScriptIcon,
+  "Next.js": nextJSIcon,
+  "Tailwind CSS": tailwindIcon,
+  Git: gitIcon,
+  React: reactIcon,
+  Sass: sassIcon,
+  TypeScript: typeScriptIcon,
+  Firebase: firebaseIcon,
+  Leaflet: leafletIcon,
+}
+
+const techIcon = techsIconMapping[tech as keyof typeof techsIconMapping];
+---
+
+<div class="techCard">
+  <span class="techCard__disc" />
+  <div class="techCard__content">
+    <figure class="techCard__icon">
+      {
+        techIcon && (
+          <Image src={techIcon} alt={`Icon of ${tech}`} />
+        )
+      }
+    </figure>
+    <Typography as='p' >
+      { tech }
+    </Typography>
+  </div>
+</div>
+
+<style lang="scss">
+  .techCard {
+    display: flex;
+    gap: rem(16);
+    align-items: center;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+
+      @include mediaq($bp-tablet) {
+        margin-bottom: 0;
+      }
+    }
+    
+    @include mediaq($bp-tablet) {
+      max-width: rem(250);
+      margin-inline: auto;
+    }
+
+    &__disc {
+      display: block;
+      width: 1rem;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background-color: rgba(245, 245, 220, 0.6);
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      padding: rem(10);
+      gap: rem(10);
+      background-color: rgba(168, 168, 168, 0.15);
+      border-radius: rem(8);
+      flex: 1;
+    }
+
+    &__icon {
+      width: 50px;
+      aspect-ratio: 1 / 1;
+
+      * {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+</style>

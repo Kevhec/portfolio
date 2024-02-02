@@ -1,31 +1,64 @@
 ---
-import ProjectCard from '@components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
-import { getLangFromUrl } from '@i18n/utils'
+import { getLangFromUrl, useTranslations } from '@i18n/utils'
 import _slug_ from 'src/pages/[lang]/project/[slug].astro';
-import { Image } from 'astro:assets';
+import CustomImage from '@components/CustomImage.astro';
+import Container from '@components/Container.astro';
+import Typography from '@components/Typography.astro';
+import ProjectCard from '@components/ProjectCard.astro';
 
 const pageLang = getLangFromUrl(Astro.url);
+const t = useTranslations(pageLang);
 
 const projects = await getCollection('projects', ({ slug }) => {
   const [projectLang, _] = slug.split('/');
   return projectLang === pageLang;
 });
 ---
+<Container>
+  <div class="projects__innerContainer">
+    <Typography as='h2' class="projects__heading line-height-1">
+      {t("projects.heading")}
+    </Typography>
+    <ul class="projects">
+      {
+        projects.map((project) => (
+          <li>
+            <ProjectCard
+              mockup={project.data.mockup}
+              mockupAlt={project.data.mockupAlt}
+              projectName={project.data.projectName}
+              excerpt={project.data.excerpt}
+              projectHref={`/${pageLang}/project/${project.slug.split('/').slice(1)}`}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Container>
 
-<ul>
-  {
-    projects.map((project) => (
-      <li>
-        <a href={`/${pageLang}/project/${project.slug.split('/').slice(1)}`}>
-          <Image
-            src={project.data.mockup.src}
-            alt={project.data.mockup.alt}
-            width={200}
-            height={200}
-          />
-        </a>
-      </li>
-    ))
+<style lang="scss">
+  .projects {
+    list-style-type: none;
+    padding: 0;
+
+    @include mediaq($bp-tablet) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__innerContainer {
+      padding: rem(64) 0;
+    }
+
+    &__heading {
+      font-size: rem(28);
+      margin-bottom: rem(38);
+
+      @include mediaq($bp-tablet) {
+        font-size: rem(36);
+      }
+    }
   }
-</ul>
+</style>

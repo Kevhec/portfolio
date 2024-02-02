@@ -28,13 +28,13 @@ const t = useTranslations(lang);
   .about {
     background-color: $neutral-white;
     &__content {
-      display: grid;
-      place-items: center;
       padding: rem(56) 0;
-      gap: rem(64);
-
-      @include mediaq($bp-small-pc) {
+      
+      @include mediaq($bp-tablet) {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        gap: rem(64);
       }
     }
 
@@ -43,20 +43,41 @@ const t = useTranslations(lang);
       background-color: $primary-green;
       padding: rem(32);
       border-radius: 44444px;
-      height: 100%;
-      aspect-ratio: 1/1;
+      width: 250px;
+      height: 250px;
       justify-self: start;
+
+      @include mediaq($bp-tablet) {
+        display: block;
+      }
 
       @include mediaq($bp-small-pc) {
         display: grid;
         place-items: center;
+        width: 100%;
+        height: initial;
+        aspect-ratio: 1/1;
+      }
+
+      img {
+        height: 100%;
+        object-fit: contain;
+
+        @include mediaq($bp-small-pc) {
+          height: initial;
+          object-fit: initial;
+        }
       }
     }
 
     &__text {
-      width: 90%;
+      width: 100%;
       color: $primary-green;
       justify-self: end;
+
+      @include mediaq($bp-tablet) {
+        width: 90%;
+      }
     }
   }
 </style>

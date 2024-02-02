@@ -38,6 +38,9 @@ export const ui: UI = {
     'about.6': 'I discovered a passion for web development',
     'about.7': 'The constant learning opportunities captivated me. I am driven by the ambition of applying newfound knowledge',
     'about.8': 'to enhance the web and make it a more user-friendly space',
+    'project.goBack': "Go to previous page",
+    'projects.heading': "What I've worked on",
+    'projects.seeProjectLabel': "See project",
   },
   es: {
     'langselect.label': 'Seleccionar idioma',
@@ -58,5 +61,8 @@ export const ui: UI = {
     'about.6': 'descubrí una gran pasión por el desarrollo web. ',
     'about.7': 'Las constantes oportunidades de aprendizaje me cautivaron. Me muevo por la ambición de aplicar nuevos conocimientos ',
     'about.8': 'para mejorar la web y hacerla un lugar más amigable con el usuario.',
+    'project.goBack': "Ir a la página anterior",
+    'projects.heading': "Mis proyectos",
+    'projects.seeProjectLabel': "Ver proyecto",
   },
 } as const;

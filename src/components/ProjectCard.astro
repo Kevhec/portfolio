@@ -1,3 +1,55 @@
 ---
-const { project } = Astro.props 
+import CustomImage from './CustomImage.astro'
+import Typography from './Typography.astro'
+import { getLangFromUrl, useTranslations } from '@i18n/utils'
+
+const pageLang = getLangFromUrl(Astro.url);
+const t = useTranslations(pageLang);
+
+const {
+  mockup,
+  mockupAlt,
+  projectName,
+  excerpt,
+  projectHref,
+} = Astro.props 
 ---
+
+<div>
+  <CustomImage
+    mobileImgUrl={mockup}
+    desktopImgUrl={mockup}
+    alt={mockupAlt}
+  />
+  <Typography as="h3" class="projectCard__heading">
+    {projectName}
+  </Typography>
+  <Typography as="p" class="projectCard__excerpt">
+    {excerpt}
+  </Typography>
+  <a
+    href={projectHref}
+    class="projectCard__link"
+  >
+    {t("projects.seeProjectLabel")}
+  </a>
+</div>
+
+<style lang="scss">
+  .projectCard {
+
+    &__heading {
+      margin: rem(8) 0 rem(4);
+    }
+
+    &__excerpt {
+      margin-bottom: rem(4);
+    }
+
+    &__link {
+      display: block;
+      width: fit-content;
+      color: inherit;
+    }
+  }
+</style>

@@ -69,7 +69,8 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
   .language-picker {
     position: absolute;
     top: 12px;
-    right: 24px;
+    /* right: 24px; */
+    left: min(100%, 1140px);
     z-index: 5555;
 
     &__button {
