@@ -1,16 +1,18 @@
 import { defineCollection, z } from 'astro:content';
 
 const projectCollection = defineCollection({
-  type: 'content',
-  // Type-check frontmatter using a schema
   schema: ({ image }) => z.object({
     title: z.string(),
+    projectName: z.string(),
     excerpt: z.string(),
-    mockup: image().refine((img) => img.width > 375, {
-      message: "Mockup must be at least 375 pixels wide!"
+    mockup: image().refine((img) => img.width >= 375, {
+      message: "Cover image must be at least 1080 pixels wide!",
     }),
     mockupAlt: z.string(),
+    demoLink: z.string(),
   }),
 });
 
-export default { projects: projectCollection };
+export const collections = {
+  projects: projectCollection
+};

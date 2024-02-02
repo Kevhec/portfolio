@@ -67,10 +67,12 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
 
 <style lang="scss">
   .language-picker {
+    --right-offset: 49px;
+
     position: absolute;
     top: 12px;
     /* right: 24px; */
-    left: min(100%, 1140px);
+    left: min(calc(100% - (var(--container-width) + var(--right-offset))), 1140px);
     z-index: 5555;
 
     &__button {
@@ -154,10 +156,12 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
   }
 
   const [
+    langSelectContainer,
     langSelectButton,
     dropdown,
     options,
   ] = [
+    $<HTMLDivElement>('.language-picker'),
     $<HTMLButtonElement>('[role="combobox"]'),
     $<HTMLDivElement>('.language-picker__dropdown'),
     $$<HTMLLIElement>('[role="option"]'),
@@ -166,6 +170,11 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
   // Current state
   let hasDropdown = false;
   let currentOptionIndex = 0;
+
+  const containerWidth = langSelectContainer?.offsetWidth;
+  langSelectContainer?.style.setProperty('--container-width', `${containerWidth}px`);
+
+  console.log(langSelectContainer)
 
   const toggleDropdown = (evt?: MouseEvent) => {
     // Stop propagation for document click event

@@ -2,12 +2,11 @@
 title: 'Project - Ejepets'
 projectName: 'Ejepets'
 excerpt: 'A portal to discover and locate pet-related businesses in Pereira, Colombia.'
-mockup: '/src/assets/images/mockups/ejepets/ejepets_1.png'
+mockup: './ejepets.png'
 mockupAlt: 'Ejepets preview image'
 demoLink: '#'
 ---
 
-import CustomImage from '@components/CustomImage.astro';
 import Description from '@components/projectPage/Description.astro';
 import Typography from '@components/Typography.astro';
 import Button from '@components/Button.astro';
@@ -36,12 +35,7 @@ export const wasForAClient = false;
 export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
 
 <Description>
-  <CustomImage
-    mobileImgUrl={mockup}
-    desktopImgUrl={mockup}
-    slot="image"
-    class="project__image"
-  />
+  ![](./ejepets.png)
   <Fragment slot="content">
     <div>
       <Typography as="p" class="semibold" style="font-size: 1.125rem">

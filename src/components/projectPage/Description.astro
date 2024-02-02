@@ -8,7 +8,7 @@ interface Props {
 ---
 
 <main class="project__main">
-  <slot name="image" />
+  <slot/>
   <div class="evenColumns">
     <slot name="content" />
   </div>
@@ -21,19 +21,25 @@ interface Props {
     }
 
     picture {
+      
+    }
+
+    > p:first-child {
       width: fit-content;
       height: fit-content;
 
       @include mediaq($bp-small-pc) {
         max-width: 60%;
       }
-    }
-
-    > picture:first-child img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      flex: 0 0 min(680px, 100%);
-      margin-bottom: 1rem;
+      
+      img {
+        width: 100%;
+        height: fit-content;
+        aspect-ratio: 4 / 3;
+        flex: 0 0 min(680px, 100%);
+        margin-bottom: 1rem;
+        object-fit: contain;
+      }
     }
 
     @include mediaq($bp-small-pc) {
