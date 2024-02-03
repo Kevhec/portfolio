@@ -4,7 +4,7 @@ projectName: 'Ejepets'
 excerpt: 'Portal para descubrir y ubicar negocios relacionados con mascotas en Pereira, Colombia'
 mockup: '@assets/images/mockups/ejepets/ejepets.png'
 mockupAlt: 'Vista previa de Ejepets'
-demoLink: '#'
+demoLink: 'https://ejepets.vercel.app'
 ---
 
 import Description from '@components/projectPage/Description.astro';
@@ -35,7 +35,7 @@ export const wasForAClient = false;
 export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
 
 <Description>
-  ![](@assets/images/mockups/ejepets/ejepets.png)
+  ![Vista previa de Ejepets](@assets/images/mockups/ejepets/ejepets.png)
   <Fragment slot="content">
     <div>
       <Typography as="p" class="semibold" style="font-size: 1.125rem">
@@ -46,6 +46,7 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
         as="a"
         href={demoLink}
         style="margin-top: 8px; display: block; width: fit-content;"
+        newTab
       >
         Demo
       </Button>

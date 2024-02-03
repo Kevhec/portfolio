@@ -19,6 +19,7 @@ export const defaultLang = 'en';
 
 export const ui: UI = {
   en: {
+    'home.title': 'KevHec - Frontend developer',
     'langselect.label': 'Select language',
     'intro.greet': "Hey! it's",
     'intro.name': 'Kevin Henao',
@@ -41,8 +42,11 @@ export const ui: UI = {
     'project.goBack': "Go to previous page",
     'projects.heading': "What I've worked on",
     'projects.seeProjectLabel': "See project",
+    'SEO.title': 'Kevhec - Frontend developer',
+    'SEO.description': "Passionate Frontend Developer in Colombia, creating websites with modern technologies. Let's collaborate for a user-centric, high-performance web experience!",
   },
   es: {
+    'home.title': 'KevHec - Desarrollador frontend',
     'langselect.label': 'Seleccionar idioma',
     'intro.greet': '¡Hey! aquí',
     'intro.introduction.1': 'Desarrollador Frontend',
@@ -64,5 +68,7 @@ export const ui: UI = {
     'project.goBack': "Ir a la página anterior",
     'projects.heading': "Mis proyectos",
     'projects.seeProjectLabel': "Ver proyecto",
+    'SEO.title': 'Kevhec - Desarrollador frontend',
+    'SEO.description': "Desarrollador Frontend Colombiano, creando sitios web con tecnologías modernas. !Colaboremos en crear experiencias web centradas en el usuario y de alto rendimiento!"
   },
 } as const;
