@@ -174,8 +174,6 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
   const containerWidth = langSelectContainer?.offsetWidth;
   langSelectContainer?.style.setProperty('--container-width', `${containerWidth}px`);
 
-  console.log(langSelectContainer)
-
   const toggleDropdown = (evt?: MouseEvent) => {
     // Stop propagation for document click event
     if (evt) {
@@ -278,10 +276,10 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
     }
   }
 
-  langSelectButton?.addEventListener('keydown', handleKeyPress)
-  langSelectButton?.addEventListener('click', toggleDropdown)
+  langSelectButton?.addEventListener('keydown', handleKeyPress);
+  langSelectButton?.addEventListener('click', toggleDropdown);
   options.forEach((option) => {
     option.addEventListener('keydown', handleKeyPress);
   })
-  document.addEventListener('click', handleDocumentInteraction)
+  document.addEventListener('click', handleDocumentInteraction);
 </script>
