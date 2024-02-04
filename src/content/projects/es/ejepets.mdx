@@ -9,11 +9,11 @@ demoLink: 'https://ejepets.vercel.app'
 
 import Description from '@components/projectPage/Description.astro';
 import Typography from '@components/Typography.astro';
-import Button from '@components/Button.astro';
 import Row from '@components/projectPage/Row.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/projectPage/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
+import DemoLinkButton from '@components/projectPage/DemoLinkButton.astro';
 
 export const components = {
   h1: (props) => <Typography as="h2" {...props} class="lora" />,
@@ -42,14 +42,7 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
         { wasForAClient ? "Cliente" : "Personal" }
       </Typography>
       Éste proyecto fue motivado por el amor hacia nuestras mascotas, con el objetivo de proveer de una forma sencilla para alcanzar aquellos negocios que ofrecen servicios para nuestros mejores amigos, todo en un lugar.
-      <Button
-        as="a"
-        href={demoLink}
-        style="margin-top: 8px; display: block; width: fit-content;"
-        newTab
-      >
-        Demo
-      </Button>
+      <DemoLinkButton href={demoLink} />
     </div>
     <div>
       <Typography as="p" class="semibold" style="font-size: 1.125rem">

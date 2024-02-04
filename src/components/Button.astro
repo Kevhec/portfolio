@@ -14,16 +14,20 @@ type Props<Tag extends Variants> = Polymorphic<{
   iconOnly?: boolean,
   textOnly?: boolean,
   newTab?: boolean,
-  positionAware?: boolean
+  positionAware?: boolean,
+  noBorder?: boolean,
+  inline?: boolean,
 }>
 
 const {
   as: Tag,
   href,
   iconOnly,
-  newTab,
+  newTab, 
   textOnly,
   positionAware,
+  noBorder,
+  inline,
   ...attrs
 } = Astro.props;
 ---
@@ -37,6 +41,8 @@ const {
       'button--iconOnly': iconOnly,
       'button--positionAware': positionAware,
       'button--textOnly': textOnly,
+      'button--noBorder': noBorder,
+      'button--inline': inline,
     },
   ]}
   target={newTab ? '_blank' : '_self'}
@@ -56,7 +62,7 @@ const {
     text-decoration: none;
     color: $primary-light-beige;
 
-    &:not(.button--iconOnly):not(.button--textOnly) {
+    &:not(.button--iconOnly):not(.button--textOnly):not(.button--noBorder) {
       padding: rem(8) rem(16);
       border: 1px solid $primary-light-beige;
       border-radius: 9999px;
@@ -80,6 +86,12 @@ const {
       transition-duration: 0.4s, 0.4s;
       transition-timing-function: ease-in-out, ease-in-out;
       z-index: -1;
+    }
+
+    &--inline {
+      display: flex;
+      gap: rem(8);
+      align-items: center;
     }
   }
 </style>

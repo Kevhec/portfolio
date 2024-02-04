@@ -9,11 +9,11 @@ demoLink: 'https://ejepets.vercel.app'
 
 import Description from '@components/projectPage/Description.astro';
 import Typography from '@components/Typography.astro';
-import Button from '@components/Button.astro';
 import Row from '@components/projectPage/Row.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/projectPage/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
+import DemoLinkButton from '@components/projectPage/DemoLinkButton.astro';
 
 export const components = {
   h1: (props) => <Typography as="h2" {...props} class="lora" />,
@@ -41,15 +41,8 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
       <Typography as="p" class="semibold" style="font-size: 1.125rem">
         { wasForAClient ? "Cliente" : "Personal" }
       </Typography>
-      This project was led by love for our pets, with the goal is to provide an easy way to reach those business that offer services for our best friends, all in one place.
-      <Button
-        as="a"
-        href={demoLink}
-        style="margin-top: 8px; display: block; width: fit-content;"
-        newTab
-      >
-        Demo
-      </Button>
+      This project was led by love for our pets, with the goal to provide an easy way to reach those business that offer services for our best friends, all in one place.
+      <DemoLinkButton href={demoLink} />
     </div>
     <div>
       <Typography as="p" class="semibold" style="font-size: 1.125rem">

@@ -2,12 +2,13 @@
 interface Props {
   classes?: string
   relative?: boolean
+  noPadded?: boolean
 }
 
-const { classes, relative } = Astro.props;
+const { classes, relative, noPadded } = Astro.props;
 ---
 
-<div class:list={[ classes, { relative } ]}>
+<div class:list={[ classes, { relative, noPadded } ]}>
   <slot />
 </div>
 
@@ -20,5 +21,9 @@ const { classes, relative } = Astro.props;
 
   .relative {
     position: relative;
+  }
+
+  .noPadded {
+    width: 100%;
   }
 </style>

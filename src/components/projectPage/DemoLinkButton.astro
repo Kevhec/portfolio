@@ -1,0 +1,45 @@
+---
+import Button from '@components/Button.astro';
+import ExternalLink from '@components/icons/ExternalLink.astro';
+
+interface Props {
+  href: string
+}
+
+const { href } = Astro.props;
+---
+
+<Button
+  as="a"
+  href={href}
+  style="margin-top: 8px; width: fit-content;"
+  newTab
+  noBorder
+  inline
+  class="demoLinkButton"
+>
+  <ExternalLink
+    containerId='externalLinkIcon'
+    arrowId='externalLinkArrow'
+  />
+  Demo
+</Button>
+
+<style lang="scss" is:inline>
+  .demoLinkButton {
+    #externalLinkIcon {
+      width: 24px;
+      height: 24px;
+    }
+
+    #externalLinkArrow {
+      transition: transform 200ms ease;
+    }
+
+    &:hover {
+      #externalLinkArrow {
+        transform: translate(2px, -2px);
+      }
+    }
+  }
+</style>

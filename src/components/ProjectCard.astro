@@ -2,6 +2,7 @@
 import CustomImage from './CustomImage.astro'
 import Typography from './Typography.astro'
 import { getLangFromUrl, useTranslations } from '@i18n/utils'
+import RightArrow from './icons/RightArrow.astro';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
@@ -31,7 +32,10 @@ const {
     href={projectHref}
     class="projectCard__link"
   >
-    {t("projects.seeProjectLabel")}
+    <figure>
+      <RightArrow />
+    </figure>
+    <span>{t("projects.seeProjectLabel")}</span>
   </a>
 </div>
 
@@ -47,9 +51,30 @@ const {
     }
 
     &__link {
-      display: block;
+      display: flex;
+      position: relative;
+      gap: rem(8);
+      align-items: center;
+      text-decoration: none;
+      line-height: 1;
       width: fit-content;
       color: inherit;
+      transition: gap 200ms ease;
+
+      > * {
+        position: relative;
+      }
+
+      figure {
+        transition: padding-left 200ms ease-out;
+      }
+
+      &:hover {
+        gap: rem(12);
+        figure {
+          padding-left: 10px;
+        }
+      }
     }
   }
 </style>
