@@ -8,17 +8,19 @@
     display: grid;
     gap: rem(16);
 
-    * {
+    p {
+      height: fit-content;
+    }
+
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: rem(8);
-      overflow: hidden;
     }
 
     @include mediaq($bp-tablet) {
       grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 400px;
+      grid-auto-rows: min-content;
 
       > :nth-child(2n-1):last-child {
         grid-column: span 2;

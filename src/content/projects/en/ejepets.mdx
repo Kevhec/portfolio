@@ -2,18 +2,19 @@
 title: 'Project - Ejepets'
 projectName: 'Ejepets'
 excerpt: 'A portal to discover and locate pet-related businesses in Pereira, Colombia.'
-mockup: '@assets/images/mockups/ejepets/ejepets.png'
+description: 'This project was led by love for our pets, with the goal to provide an easy way to reach those business that offer services for our best friends, all in one place.'
+wasForClient: false
+stack: ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
+mockup: '@assets/images/mockups/ejepets/ejepets_1.webp'
 mockupAlt: 'Ejepets preview image'
 demoLink: 'https://ejepets.vercel.app'
 ---
 
-import Description from '@components/projectPage/Description.astro';
 import Typography from '@components/Typography.astro';
 import Row from '@components/projectPage/Row.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/projectPage/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
-import DemoLinkButton from '@components/projectPage/DemoLinkButton.astro';
 
 export const components = {
   h1: (props) => <Typography as="h2" {...props} class="lora" />,
@@ -29,33 +30,9 @@ export const {
   mockup,
   mockupAlt,
   demoLink,
+  stack,
+  wasForAClient,
 } = frontmatter
-
-export const wasForAClient = false;
-export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
-
-<Description>
-  ![Ejepets preview image](@assets/images/mockups/ejepets/ejepets.png)
-  <Fragment slot="content">
-    <div>
-      <Typography as="p" class="semibold" style="font-size: 1.125rem">
-        { wasForAClient ? "Cliente" : "Personal" }
-      </Typography>
-      This project was led by love for our pets, with the goal to provide an easy way to reach those business that offer services for our best friends, all in one place.
-      <DemoLinkButton href={demoLink} />
-    </div>
-    <div>
-      <Typography as="p" class="semibold" style="font-size: 1.125rem">
-        {"Tecnologías"}
-      </Typography>
-      <List>
-        {stack.map(tech => (
-          <li>{tech}</li>
-        ))}
-      </List>
-    </div>
-  </Fragment>
-</Description>
 
 <Row paddedRight>
   # What makes this unique
@@ -65,9 +42,11 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
 
 <Row evenColumns inverted>
   <div>
-    # Why these technologies
+    <div>
+      # Why these technologies
 
-    Given its robustness and ability to optimize web applications, Next.js allowed for the optimal management of site routing, creating a protected route for the admin panel, and providing optimized resources based on the user's device. Furthermore, thanks to the use of React's hooks, it was possible to handle map interactions efficiently, applying real-time filters to locate establishments that offer precisely what is needed.
+      Given its robustness and ability to optimize web applications, Next.js allowed for the optimal management of site routing, creating a protected route for the admin panel, and providing optimized resources based on the user's device. Furthermore, thanks to the use of React's hooks, it was possible to handle map interactions efficiently, applying real-time filters to locate establishments that offer precisely what is needed.
+    </div>
   </div>
   <div>
     {
@@ -78,7 +57,7 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
   </div>
 </Row>
 
-<Row centered>
+<Row paddedRight>
   # Things that made it worth it
 
   Given the project's characteristics, I managed to practice better handling of external APIs, the use of non-relational databases like Firestore, and form management to add new establishments, connecting the data with Firebase.
@@ -90,12 +69,10 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
   # Gallery
 
   <Gallery>
-    ![EjePets site gallery image 1](@assets/images/mockups/ejepets/ejepets_2.png)
+    ![EjePets site gallery image 1](@assets/images/mockups/ejepets/ejepets_2.webp)
 
-    ![EjePets site gallery image 2](@assets/images/mockups/ejepets/ejepets_3.png)
+    ![EjePets site gallery image 2](@assets/images/mockups/ejepets/ejepets_3.webp)
 
-    ![EjePets site gallery image 3](@assets/images/mockups/ejepets/ejepets_4.png)
-
-    ![EjePets site gallery image 4](@assets/images/mockups/ejepets/ejepets_5.png)
+    ![EjePets site gallery image 3](@assets/images/mockups/ejepets/ejepets_4.webp)
   </Gallery>
 </Row>

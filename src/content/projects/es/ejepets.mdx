@@ -2,18 +2,19 @@
 title: 'Projecto - Ejepets'
 projectName: 'Ejepets'
 excerpt: 'Portal para descubrir y ubicar negocios relacionados con mascotas en Pereira, Colombia'
-mockup: '@assets/images/mockups/ejepets/ejepets.png'
+description: 'Éste proyecto fue motivado por el amor hacia nuestras mascotas, con el objetivo de proveer de una forma sencilla para alcanzar aquellos negocios que ofrecen servicios para nuestros mejores amigos, todo en un lugar.'
+wasForClient: false
+stack: ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
+mockup: '@assets/images/mockups/ejepets/ejepets_1.webp'
 mockupAlt: 'Vista previa de Ejepets'
 demoLink: 'https://ejepets.vercel.app'
 ---
 
-import Description from '@components/projectPage/Description.astro';
 import Typography from '@components/Typography.astro';
 import Row from '@components/projectPage/Row.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/projectPage/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
-import DemoLinkButton from '@components/projectPage/DemoLinkButton.astro';
 
 export const components = {
   h1: (props) => <Typography as="h2" {...props} class="lora" />,
@@ -29,33 +30,9 @@ export const {
   mockup,
   mockupAlt,
   demoLink,
+  stack,
+  wasForAClient,
 } = frontmatter
-
-export const wasForAClient = false;
-export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
-
-<Description>
-  ![Vista previa de Ejepets](@assets/images/mockups/ejepets/ejepets.png)
-  <Fragment slot="content">
-    <div>
-      <Typography as="p" class="semibold" style="font-size: 1.125rem">
-        { wasForAClient ? "Cliente" : "Personal" }
-      </Typography>
-      Éste proyecto fue motivado por el amor hacia nuestras mascotas, con el objetivo de proveer de una forma sencilla para alcanzar aquellos negocios que ofrecen servicios para nuestros mejores amigos, todo en un lugar.
-      <DemoLinkButton href={demoLink} />
-    </div>
-    <div>
-      <Typography as="p" class="semibold" style="font-size: 1.125rem">
-        {"Tecnologías"}
-      </Typography>
-      <List>
-        {stack.map(tech => (
-          <li>{tech}</li>
-        ))}
-      </List>
-    </div>
-  </Fragment>
-</Description>
 
 <Row paddedRight>
   # Qué lo hace único
@@ -65,9 +42,11 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
 
 <Row evenColumns inverted>
   <div>
-    # Por qué estas tecnologías
+    <div>
+      # Por qué estas tecnologías
 
-    Dada su robustez y capacidad para optimizar aplicaciones web, Next.js permitió gestionar de la mejor manera el enrutamiento del sitio, creando una ruta protegida para el panel de administrador y proporcionando recursos optimizados según el dispositivo del usuario. Además, gracias al uso de los *hooks* de React, fue posible manejar de manera óptima la interacción con el mapa, aplicando filtros en tiempo real para encontrar los establecimientos que ofrecen exactamente lo que se necesita.
+      Dada su robustez y capacidad para optimizar aplicaciones web, Next.js permitió gestionar de la mejor manera el enrutamiento del sitio, creando una ruta protegida para el panel de administrador y proporcionando recursos optimizados según el dispositivo del usuario. Además, gracias al uso de los *hooks* de React, fue posible manejar de manera óptima la interacción con el mapa, aplicando filtros en tiempo real para encontrar los establecimientos que ofrecen exactamente lo que se necesita.
+    </div>
   </div>
   <div>
     {
@@ -78,7 +57,7 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
   </div>
 </Row>
 
-<Row centered>
+<Row paddedRight>
   # Razones por las que valió el esfuerzo
 
   Dadas las características del proyecto, logré practicar un mejor manejo de APIs externas, el uso de bases de datos no relacionales como Firestore, el manejo de formularios para añadir nuevos establecimientos y conectar los datos con Firebase.
@@ -90,12 +69,10 @@ export const stack = ["Next.js", "React", "Tailwind CSS", "Firebase", "Leaflet"]
   # Galería
 
   <Gallery>
-    ![Imagen 1 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_2.png)
+    ![Imagen 1 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_2.webp)
 
-    ![Imagen 2 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_3.png)
+    ![Imagen 2 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_3.webp)
 
-    ![Imagen 3 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_4.png)
-
-    ![Imagen 4 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_5.png)
+    ![Imagen 3 de la galería del sitio EjePets](@assets/images/mockups/ejepets/ejepets_4.webp)
   </Gallery>
 </Row>

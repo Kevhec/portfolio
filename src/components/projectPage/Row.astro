@@ -37,12 +37,10 @@ const {
     > *:not(:last-child) {
       margin-bottom: 1rem;
     }
-    
-    @include mediaq($bp-tablet) {
-      > *:not(:last-child) {
-        margin-bottom: 0;
-      }
-    }
+
+/*     p {
+      line-height: 1.2;
+    } */
 
     img {
       width: 100%;
@@ -89,7 +87,7 @@ const {
         gap: rem(32);
       }
 
-      & > * {
+      > * {
         display: flex;
         flex-direction: column;
         align-items: center;
