@@ -2,8 +2,7 @@
 import Typography from '../components/Typography.astro';
 import Sunflower from '../components/Sunflower.astro';
 import Button from '../components/Button.astro';
-import LinkedinIcon from '../components/icons/LinkedinIcon.astro';
-import GithubIcon from '../components/icons/GithubIcon.astro';
+import Icon from '../components/icon/Icon.astro';
 import Container from '@components/Container.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 
@@ -45,7 +44,7 @@ const t = useTranslations(lang);
           aria-label={t('intro.linkedIn.label')}
         >
           <figure aria-hidden="true">
-            <LinkedinIcon />  
+            <Icon variant="LinkedIn" />
           </figure>
           <p class="visually-hidden">{t('intro.linkedIn.label')}</p>
         </Button>
@@ -57,7 +56,7 @@ const t = useTranslations(lang);
           aria-label={t('intro.github.label')}
         >
           <figure aria-hidden="true">
-            <GithubIcon />
+            <Icon variant="Github" />
           </figure>
           <p class="visually-hidden">{t('intro.github.label')}</p>
         </Button>

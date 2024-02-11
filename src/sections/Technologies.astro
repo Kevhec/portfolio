@@ -1,0 +1,53 @@
+---
+import Container from '@components/Container.astro';
+import Typography from '@components/Typography.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import TechCard from '@components/TechCard.astro';
+import type { TechsList } from '@types';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const techs: TechsList[] = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Git', 'Sass']
+---
+
+<Container>
+  <section class="technologies">
+    <Typography as='h2' class="technologies__heading">
+      {t('technologies.heading')}
+    </Typography>
+    <div class="technologies__cards">
+      {techs.map(tech => (
+        <TechCard tech={tech} noBullet vertical />
+      ))}
+    </div>
+  </section>
+</Container>
+
+<style lang="scss">
+  .technologies {
+    @include mediaq($bp-small-pc) {
+      padding: 40px 0;
+    }
+
+    &__heading {
+      width: 100%;
+      text-align: center;
+      margin-bottom: rem(19);
+
+      @include mediaq($bp-tablet) {
+        margin-bottom: rem(38);
+      }
+    }
+
+    &__cards {
+      width: 100%;
+      max-width: 750px;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
+</style>

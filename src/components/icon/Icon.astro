@@ -1,0 +1,56 @@
+---
+import ExternalLink from './variants/ExternalLink.astro';
+import Firebase from './variants/Firebase.astro';
+import Git from './variants/Git.astro';
+import Github from './variants/Github.astro';
+import JavaScript from './variants/JavaScript.astro';
+import LinkedIn from './variants/LinkedIn.astro';
+import Nextjs from './variants/Nextjs.astro';
+import React from './variants/React.astro';
+import RightArrow from './variants/RightArrow.astro';
+import Sass from './variants/Sass.astro';
+import Tailwind from './variants/Tailwind.astro';
+import TypeScript from './variants/TypeScript.astro';
+
+type Variant =
+  | 'ExternalLink'
+  | 'Firebase'
+  | 'Git'
+  | 'Github'
+  | 'JavaScript'
+  | 'LinkedIn'
+  | 'Nextjs'
+  | 'React'
+  | 'RightArrow'
+  | 'Sass'
+  | 'Tailwind'
+  | 'TypeScript'
+
+interface Props {
+  variant: Variant
+}
+
+const { variant } = Astro.props;
+
+const iconMap: Record<Variant, any> = {
+  ExternalLink,
+  Firebase,
+  Git,
+  Github,
+  JavaScript,
+  LinkedIn,
+  Nextjs,
+  React,
+  RightArrow,
+  Sass,
+  Tailwind,
+  TypeScript,
+}
+
+const SelectedIcon = iconMap[variant];
+---
+{
+  SelectedIcon && (
+    <SelectedIcon />
+  )
+}

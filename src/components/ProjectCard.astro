@@ -2,7 +2,7 @@
 import CustomImage from './CustomImage.astro'
 import Typography from './Typography.astro'
 import { getLangFromUrl, useTranslations } from '@i18n/utils'
-import RightArrow from './icons/RightArrow.astro';
+import Icon from './icon/Icon.astro';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
@@ -33,7 +33,7 @@ const {
     class="projectCard__link"
   >
     <figure>
-      <RightArrow />
+      <Icon variant='RightArrow' />
     </figure>
     <span>{t("projects.seeProjectLabel")}</span>
   </a>

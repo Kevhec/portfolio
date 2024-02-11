@@ -1,0 +1,30 @@
+---
+import AnimatedWithFallback from '@components/AnimatedWithFallback.astro'
+---
+
+<AnimatedWithFallback
+  spriteSheet='/images/sprites/arrow/arrow_spritesheet.png'
+  fallback='/images/sprites/arrow/simplified_arrow.png'
+  spriteSheetWidth={3432}
+  frameWidth={104}
+  frameHeight={69}
+  frameCount={33}
+  animationDuration="4s"
+  endOnHover
+  classes='backArrow'
+/>
+
+<style lang="scss" is:inline>
+  .backArrow {
+    > * {
+      transition: all 200ms ease-in;
+
+    }
+    &:hover {
+      > * {
+        filter: brightness(2) drop-shadow(0px 0px 10px rgba(245, 245, 220, 0.4));
+        transform: translateX(-10px);
+      }
+    }
+  }
+</style>

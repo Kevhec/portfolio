@@ -1,0 +1,166 @@
+---
+interface Props {
+  spriteSheet: string,
+  spriteSheetWidth: number,
+  frameWidth: number,
+  frameHeight: number,
+  frameCount: number,
+  animationDuration: string,
+  fallback?: string,
+  endOnHover?: boolean,
+  easeIn?: boolean,
+  classes?: string,
+}
+
+const {
+  spriteSheet,
+  spriteSheetWidth,
+  frameWidth,
+  frameHeight,
+  frameCount,
+  animationDuration,
+  fallback,
+  endOnHover,
+  easeIn,
+  classes,
+} = Astro.props;
+---
+
+<div
+  class:list={["animatedElementContainer", classes]}
+  style={`--fallback: ${fallback || ''}; --frameWidth: ${frameWidth}px; --frameHeight: ${frameHeight}px; --frameCount: ${frameCount};`}
+>
+  <div
+    class:list={[
+      "animated",
+      {
+        'animated--easeIn': easeIn,
+        'animated--endOnHover': endOnHover
+      }
+    ]}
+    style={`--spriteSheetWidth: -${spriteSheetWidth}px; --animationDuration: ${animationDuration}; background: url(${spriteSheet});`}
+    data-end-on-hover={`${endOnHover}`}
+  />
+  {fallback && (
+    <div
+      class="fallback"
+      style={`background: url(${fallback});`}
+    />
+  )}
+</div>
+
+<style lang="scss">
+  .animatedElementContainer {
+    position: relative;
+    width: var(--frameWidth);
+    height: var(--frameHeight);
+
+    > * {
+      position: absolute;
+    }
+  }
+
+  .animated {
+    width: 100%;
+    height: 100%;
+    animation-name: sprite;
+
+    &--easeIn {
+      animation-name: spriteEaseIn;
+      animation-delay: 2s;
+      opacity: 0;
+    }
+
+    animation-duration: var(--animationDuration);
+    animation-timing-function: steps(var(--frameCount), start);
+    animation-fill-mode: forwards;
+  }
+
+  .fallback {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-delay: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-delay: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes sprite {
+    from {
+      background-position: 0px;
+    }
+    to {
+      background-position: var(--spriteSheetWidth);
+    }
+  }
+
+  @keyframes spriteEaseIn {
+    from {
+      background-position: 0px;
+      opacity: 0;
+    }
+    to {
+      background-position: var(--spriteSheetWidth);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const container = document.querySelectorAll('.animatedElementContainer');
+
+  function forceFinalState(animatedEl, fallbackEl) {
+    animatedEl.style.animation = 'none'
+    animatedEl.style.opacity = '0'
+    fallbackEl.style.opacity = '1'
+  }
+
+  container.forEach(container => {
+    const animatedElement = container.querySelector('.animated')
+    const fallbackElement = container.querySelector('.fallback')
+  
+    animatedElement.addEventListener('animationend', () => {
+      animatedElement.style.opacity = '1';
+      animatedElement.classList.add('fadeOut');
+      fallbackElement.classList.add('fadeIn');
+    }, false)
+
+    const triggerForceFinalState = animatedElement.dataset.endOnHover;
+    if (triggerForceFinalState) {
+      container.addEventListener('mouseover', () => {
+        forceFinalState(animatedElement, fallbackElement)
+      })
+    }
+  })
+</script>

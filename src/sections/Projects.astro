@@ -22,7 +22,7 @@ const projects = await getCollection('projects', ({ slug }) => {
     <ul class="projects">
       {
         projects.map((project) => (
-          <li>
+          <li class="projects__listItem">
             <ProjectCard
               mockup={project.data.mockup}
               mockupAlt={project.data.mockupAlt}
@@ -45,6 +45,7 @@ const projects = await getCollection('projects', ({ slug }) => {
     @include mediaq($bp-tablet) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
     &__innerContainer {
@@ -57,6 +58,14 @@ const projects = await getCollection('projects', ({ slug }) => {
 
       @include mediaq($bp-tablet) {
         font-size: rem(36);
+      }
+    }
+
+    &__listItem {
+      margin-bottom: 1.5rem;
+
+      @include mediaq($bp-tablet) {
+        margin-bottom: 0;
       }
     }
   }

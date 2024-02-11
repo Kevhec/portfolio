@@ -1,21 +1,23 @@
 ---
 import Button from '@components/Button.astro';
 import Typography from '@components/Typography.astro';
-import GoBackArrow from '@components/icons/GoBackArrow.astro';
 import { Image } from 'astro:assets';
 import DemoLinkButton from './DemoLinkButton.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import GoBackArrow from './GoBackArrow.astro';
 import List from './List.astro';
 
-const { project, lang, goBackLabel } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { project } = Astro.props;
 ---
 
 <div class="projectHeader">
   <div class="projectHeader__heading">
     <Button as="a" iconOnly href={`/${lang}/`} class="projectHeader__goBack">
-      <figure aria-hidden="true">
-        <GoBackArrow />  
-      </figure>
-      <span class="visually-hidden">{goBackLabel}</span>
+      <GoBackArrow />
+      <span class="visually-hidden">{t("project.goBack")}</span>
     </Button>
     <Typography as='h1' class="projectHeader__name">
       {project.data.projectName}
@@ -26,7 +28,7 @@ const { project, lang, goBackLabel } = Astro.props;
     <div class="projectHeader__meta">
       <div>
         <Typography as="h3" class="projectHeader__metaHeading semibold">
-          { project.data.wasForAClient ? "Cliente" : "Personal" }
+          { project.data.wasForClient ? t("project.clientLabel") : t("project.personalLabel") }
         </Typography>
         <Typography as="p">
           { project.data.description }

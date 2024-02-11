@@ -1,9 +1,14 @@
-<div id="sunflower" />
+---
+import AnimatedWithFallback from '@components/AnimatedWithFallback.astro'
+---
 
-<style lang="scss">
-  @include sunflowerAnimation();
-
-  #sunflower {
-    @include sunflowerProps();
-  }
-</style>
+<AnimatedWithFallback
+  spriteSheet='/images/sprites/flower/flower_spritesheet.png'
+  fallback='/images/sprites/flower/simplified_flower.png'
+  spriteSheetWidth={7200}
+  frameWidth={180}
+  frameHeight={200}
+  frameCount={40}
+  animationDuration="8s"
+  easeIn
+/>

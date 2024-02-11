@@ -1,12 +1,8 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import Button from '@components/Button.astro';
 import Container from '@components/Container.astro';
-import Typography from '@components/Typography.astro';
-import GoBackArrow from '@components/icons/GoBackArrow.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
-import { Image } from 'astro:assets';
 import ProjectHeader from '@components/projectPage/ProjectHeader.astro';
 
 const lang = getLangFromUrl(Astro.url);
@@ -38,8 +34,6 @@ const { Content } = await project.render();
     <main class="project__innerContainer">
       <ProjectHeader
         project={project}
-        lang={lang}
-        goBackLabel={t("project.goBack")}
       />
       <Content />
     </main>
