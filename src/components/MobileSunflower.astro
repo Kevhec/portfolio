@@ -1,0 +1,19 @@
+---
+import Sunflower from '@components/Sunflower.astro';
+---
+
+<Sunflower classes="mobileSunflower" />
+
+<style lang="scss" is:global>
+  .mobileSunflower {
+    display: block;
+    position: absolute !important;
+    top: -60px;
+    right: -45px;
+    transform: scale(.7);
+  
+    @include mediaq($bp-small-pc) {
+      display: none;
+    }
+  }
+</style>

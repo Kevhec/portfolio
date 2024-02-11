@@ -140,16 +140,18 @@ const {
 <script>
   const container = document.querySelectorAll('.animatedElementContainer');
 
-  function forceFinalState(animatedEl, fallbackEl) {
+  function forceFinalState(animatedEl: HTMLElement, fallbackEl: HTMLElement) {
     animatedEl.style.animation = 'none'
     animatedEl.style.opacity = '0'
     fallbackEl.style.opacity = '1'
   }
 
   container.forEach(container => {
-    const animatedElement = container.querySelector('.animated')
-    const fallbackElement = container.querySelector('.fallback')
+    const animatedElement: HTMLDivElement | null = container.querySelector('.animated')
+    const fallbackElement: HTMLDivElement | null = container.querySelector('.fallback')
   
+    if (!animatedElement || !fallbackElement) return
+
     animatedElement.addEventListener('animationend', () => {
       animatedElement.style.opacity = '1';
       animatedElement.classList.add('fadeOut');
@@ -157,7 +159,8 @@ const {
     }, false)
 
     const triggerForceFinalState = animatedElement.dataset.endOnHover;
-    if (triggerForceFinalState) {
+
+    if (triggerForceFinalState === 'true') {
       container.addEventListener('mouseover', () => {
         forceFinalState(animatedElement, fallbackElement)
       })

@@ -1,10 +1,12 @@
 ---
 import Typography from '../components/Typography.astro';
 import Sunflower from '../components/Sunflower.astro';
+import MobileSunflower from '../components/MobileSunflower.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/icon/Icon.astro';
 import Container from '@components/Container.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import SocialLinks from '@components/SocialLinks.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -26,6 +28,7 @@ const t = useTranslations(lang);
         {t('intro.introduction.2')},<br>
         {t('intro.introduction.3')}<br>
       </Typography>
+      <MobileSunflower />
       <div class="introduction__buttons">
         <Button
           as='a'
@@ -36,30 +39,7 @@ const t = useTranslations(lang);
         >
           {t('intro.getInTouch')}
         </Button>
-        <Button
-          as='a'
-          href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
-          newTab
-          iconOnly
-          aria-label={t('intro.linkedIn.label')}
-        >
-          <figure aria-hidden="true">
-            <Icon variant="LinkedIn" />
-          </figure>
-          <p class="visually-hidden">{t('intro.linkedIn.label')}</p>
-        </Button>
-        <Button
-          as='a'
-          href="https://github.com/Kevhec"
-          newTab
-          iconOnly
-          aria-label={t('intro.github.label')}
-        >
-          <figure aria-hidden="true">
-            <Icon variant="Github" />
-          </figure>
-          <p class="visually-hidden">{t('intro.github.label')}</p>
-        </Button>
+        <SocialLinks />
       </div>
     </div>
     <div class="sunflower">
@@ -79,26 +59,12 @@ const t = useTranslations(lang);
       grid-template-columns: repeat(2, 1fr);
     }
 
+    &__content {
+      position: relative;
+    }
+
     &__upper-line {
       position: relative;
-
-      &::after {
-        display: none;
-        content: "";
-        @include sunflowerProps();
-        position: absolute;
-        transform: scale(.7);
-        top: -110%;
-        right: rem(-150);
-        
-        @include mediaq($bp-phone) {
-          display: block;
-        }
-
-        @include mediaq($bp-small-pc) {
-          display: none;
-        }
-      }
     }
 
     &__bottom-line {

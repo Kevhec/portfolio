@@ -77,13 +77,16 @@ const { project } = Astro.props;
 
     &__goBack {
       position: relative;
-      display: inline-block;
+      top: 2rem;
+      display: block;
       width: fit-content;
       height: fit-content;
       z-index: 2;
+      overflow: visible;
+      transform-origin: left;
+      transform: scale(.7);
 
       @include mediaq($bp-tablet) {
-        display: block;
         margin-bottom: 32px;
       }
     }
@@ -107,9 +110,13 @@ const { project } = Astro.props;
     }
 
     &__meta {
+      > :first-child {
+        margin-bottom: rem(12);
+      }
+
       @include mediaq($bp-tablet) {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(0px,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
         column-gap: rem(16);
       }
 

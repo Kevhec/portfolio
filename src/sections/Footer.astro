@@ -1,0 +1,62 @@
+---
+import Button from '@components/Button.astro';
+import Container from '@components/Container.astro';
+import Typography from '@components/Typography.astro';
+import SocialLinks from '@components/SocialLinks.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="footer">
+  <Container>
+    <div class="footer__innerContainer">
+      <div class="footer__content">
+        <Typography as='h2'>
+          {t('footer.heading')}
+        </Typography>
+        <Button as='a' href="mailto:kevhec.dev@gmail.com" noBorder>
+          <Typography as="p">
+            kevhec.dev@gmail.com
+          </Typography>
+        </Button>
+      </div>
+      <div class="footer__socials">
+        <SocialLinks />
+      </div>
+    </div>
+  </Container>
+</footer>
+
+<style lang="scss">
+  .footer {
+    margin-top: rem(32);
+    background-color: #49474C;
+    padding: 140px 0;
+
+    &__innerContainer {
+      @include mediaq($bp-tablet) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__content {
+      text-align: center;
+      margin-bottom: 3rem;
+
+      @include mediaq($bp-tablet) {
+        margin-bottom: 0;
+      }
+    }
+
+    &__socials {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+  }
+</style>

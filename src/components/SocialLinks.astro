@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import Button from './Button.astro';
+import Icon from './icon/Icon.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Button
+  as='a'
+  href="https://www.linkedin.com/in/kevin-alejandro-806b2a195/"
+  newTab
+  iconOnly
+  aria-label={t('intro.linkedIn.label')}
+>
+  <figure aria-hidden="true">
+    <Icon variant="LinkedIn" />
+  </figure>
+  <p class="visually-hidden">{t('intro.linkedIn.label')}</p>
+</Button>
+<Button
+  as='a'
+  href="https://github.com/Kevhec"
+  newTab
+  iconOnly
+  aria-label={t('intro.github.label')}
+>
+  <figure aria-hidden="true">
+    <Icon variant="Github" />
+  </figure>
+  <p class="visually-hidden">{t('intro.github.label')}</p>
+</Button>

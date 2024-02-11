@@ -45,6 +45,7 @@ export const ui: UI = {
     'projects.heading': "What I've worked on",
     'projects.seeProjectLabel': "See project",
     'technologies.heading': "Technologies",
+    'footer.heading': "Send me an email!",
     'SEO.title': 'Kevhec - Frontend developer',
     'SEO.description': "Passionate Frontend Developer in Colombia, creating websites with modern technologies. Let's collaborate for a user-centric, high-performance web experience!",
   },
@@ -73,6 +74,7 @@ export const ui: UI = {
     'projects.heading': "Mis proyectos",
     'projects.seeProjectLabel': "Ver proyecto",
     'technologies.heading': "Tecnologías",
+    'footer.heading': "¡Envíame un Email!",
     'SEO.title': 'Kevhec - Desarrollador frontend',
     'SEO.description': "Desarrollador Frontend Colombiano, creando sitios web con tecnologías modernas. !Colaboremos en crear experiencias web centradas en el usuario y de alto rendimiento!"
   },

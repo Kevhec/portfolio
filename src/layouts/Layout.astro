@@ -3,6 +3,7 @@ import Container from '@components/Container.astro';
 import LanguagePicker from '@components/LanguagePicker.astro';
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import Footer from '@sections/Footer.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -36,6 +37,7 @@ const t = useTranslations(lang);
       </Container>
     </header>
     <slot />
+    <Footer />
 	</body>
 </html>
 <style lang="scss" is:global>
@@ -44,7 +46,6 @@ const t = useTranslations(lang);
     color: $primary-light-beige;
     overflow-x: hidden;
     font-family: $quicksand;
-    padding-bottom: rem(32);
   }
 
   .container {
