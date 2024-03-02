@@ -180,18 +180,28 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
     if (hasDropdown) {
       // Auto focus current option on dropdown
       focusCurrentOption();
+      options.forEach((option) => {
+        option.setAttribute('tabindex', '0');
+      })
     } else {
       // Focus toggle button on dropdown close
       langSelectButton?.focus();
+      options.forEach((option) => {
+        option.setAttribute('tabindex', '-1');
+      })
     }
   }
 
   const handleKeyPress = (evt: KeyboardEvent) => {
     // As button is in a form, this helps prevent submit behavior
     // This was maintaind even with type=button on the element just in case
-    evt.preventDefault();
-    const { key } = evt;
+    const { key, shiftKey } = evt;
     const openKeys = ['ArrowUp', 'ArrowDown', 'Enter', ' '];
+
+    const target = evt.target as HTMLElement
+
+    if (key !== 'Tab') 
+      evt.preventDefault();
 
     // Toggle dropdown when openkey is pressed and it is closed
     if (!hasDropdown && openKeys.includes(key)) {
@@ -211,6 +221,13 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
         case 'Enter':
         case ' ':
           selectCurrentOption();
+          break
+        case 'Tab':
+          if (options[options.length-1] != target) 
+            return;
+
+          if (!shiftKey && target.id !== 'select')
+            toggleDropdown();
           break
         default:
           break

@@ -60,6 +60,8 @@ const {
       width: fit-content;
       color: inherit;
       transition: gap 200ms ease;
+      padding-right: 10px;
+      overflow: visible;
 
       > * {
         position: relative;
@@ -69,11 +71,15 @@ const {
         transition: padding-left 200ms ease-out;
       }
 
-      &:hover {
+      &:hover, &:focus {
         gap: rem(12);
         figure {
           padding-left: 10px;
         }
+      }
+
+      &:focus {
+        outline: 1px solid $neutral-white;
       }
     }
   }

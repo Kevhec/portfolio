@@ -68,9 +68,17 @@ const {
       border-radius: 9999px;
     }
 
-    &:hover {
-      span {
-        @include size(225%, calc(var(--button-width)*2.25))
+    &:focus {
+      outline: 2px dashed $neutral-white;
+      outline-offset: 4px;
+    }
+
+    &--positionAware {
+      &:hover, &:focus {
+        outline: unset;
+        span {
+          @include size(225%, calc(var(--button-width)*2.25))
+        }
       }
     }
 
@@ -105,29 +113,41 @@ const {
     const yPos = buttonRect.top + scrollTop;
     const xPos = buttonRect.left;
     const width = button.offsetWidth;
+    const height = button.offsetHeight;
+
+    console.log(yPos)
 
     return {
       yPos,
       xPos,
       width,
+      height,
     };
   };
 
   const positionSpan = ({
-    span, mouseEvent, xPos, yPos,
+    span, mouseEvent, xPos, yPos, width, height
   }:{
     span: HTMLSpanElement,
-    mouseEvent: MouseEvent,
+    mouseEvent?: MouseEvent,
     xPos: number,
     yPos: number,
+    width: number,
+    height: number,
   }) => {
-    const { clientX, pageY } = mouseEvent;
+    const clientX = mouseEvent?.clientX
+    const pageY = mouseEvent?.pageY
 
-    const relX = clientX - xPos;
-    const relY = pageY - yPos;
+    const relX = clientX
+      ? clientX - xPos
+      : width / 2
 
-    span.style.setProperty('--top', `${relY}px`);
+    const relY = pageY
+      ? pageY - yPos
+      : height / 2
+
     span.style.setProperty('--left', `${relX}px`);
+    span.style.setProperty('--top', `${relY}px`);
   };
 
   const applyButtonsVariables = () => {
@@ -136,15 +156,19 @@ const {
       NodeListOf<HTMLButtonElement> = document.querySelectorAll('.button--positionAware');
 
     buttons.forEach((button) => {
-      const { xPos, yPos, width } = getButtonProps(button);
+      const span = button.querySelector('span');
+      const { xPos, yPos, width, height } = getButtonProps(button);
+
+      if (span) {
+        positionSpan({ span, xPos, yPos, width, height })
+      }
 
       button.style.setProperty('--button-width', `${width}px`);
 
       const handleButtonEvent = (evt: MouseEvent) => {
-        const span = button.querySelector('span');
         if (!span) return;
         positionSpan({
-          span, mouseEvent: evt, xPos, yPos,
+          span, mouseEvent: evt, xPos, yPos, width, height
         });
       };
       button.removeEventListener('mouseenter', handleButtonEvent);
@@ -157,7 +181,5 @@ const {
 
   applyButtonsVariables();
 
-  window.addEventListener('resize', () => {
-    applyButtonsVariables();
-  });
+  window.addEventListener('resize', applyButtonsVariables);
 </script>

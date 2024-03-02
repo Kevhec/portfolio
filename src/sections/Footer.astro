@@ -16,7 +16,7 @@ const t = useTranslations(lang);
         <Typography as='h2'>
           {t('footer.heading')}
         </Typography>
-        <Button as='a' href="mailto:kevhec.dev@gmail.com" noBorder>
+        <Button class="footer__mail" as='a' href="mailto:kevhec.dev@gmail.com" noBorder>
           <Typography as="p">
             kevhec.dev@gmail.com
           </Typography>
@@ -50,6 +50,13 @@ const t = useTranslations(lang);
 
       @include mediaq($bp-tablet) {
         margin-bottom: 0;
+      }
+    }
+
+    &__mail {
+      display: block;
+      &:focus {
+        outline: 1px solid $neutral-white;
       }
     }
 

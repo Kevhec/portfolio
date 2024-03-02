@@ -48,6 +48,10 @@ const techs: TechsList[] = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tai
       flex-wrap: wrap;
       justify-content: space-around;
       gap: 1rem;
+
+      @include mediaq($bp-tablet) {
+        justify-content: center;
+      }
     }
   }
 </style>
