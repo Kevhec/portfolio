@@ -1,15 +1,27 @@
 ---
 import Sunflower from '@components/Sunflower.astro';
+
+interface Props {
+  refElement: string
+  lang: string
+}
+
+const { refElement, lang } = Astro.props;
+
 ---
 
-<Sunflower classes="mobileSunflower" />
+<Sunflower
+  classes="mobileSunflower"
+  data-ref-element={refElement}
+  data-lang={lang}
+/>
 
 <style lang="scss" is:global>
   .mobileSunflower {
     display: block;
     position: absolute !important;
     top: -60px;
-    right: -45px;
+    left: var(--xPos);
     transform: scale(.7);
   
     @include mediaq($bp-small-pc) {
@@ -17,3 +29,30 @@ import Sunflower from '@components/Sunflower.astro';
     }
   }
 </style>
+
+<script>
+  const sunflower = document.querySelector('.mobileSunflower') as HTMLDivElement
+
+  const pageLang = sunflower?.dataset.lang;
+  const refElementId = sunflower?.dataset.refElement;
+  const refElement = document.getElementById(refElementId || '') as HTMLDivElement
+
+  const refElementRect = refElement.getBoundingClientRect();
+  const refElementX = refElementRect.x;
+  const refElementWidth = refElementRect.width;
+
+  const sunflowerRect = sunflower.getBoundingClientRect();
+  const sunflowerWidth = sunflowerRect.width;
+
+  const sunflowerRightOffset = pageLang === 'en' ? -8 : 10;
+  console.log({refElementWidth, refElementX})
+
+  const sunflowerLeftPosition =
+    refElementX
+    + refElementWidth
+    - sunflowerRightOffset
+    - sunflowerWidth / 2
+
+  sunflower.style.setProperty('--xPos', `${sunflowerLeftPosition}px`)
+
+</script>

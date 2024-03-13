@@ -1,6 +1,6 @@
 ---
 import AnimatedWithFallback from '@components/AnimatedWithFallback.astro'
-const { classes } = Astro.props;
+const { classes, ...attrs } = Astro.props;
 ---
 
 <AnimatedWithFallback
@@ -13,4 +13,5 @@ const { classes } = Astro.props;
   animationDuration="8s"
   easeIn
   classes={classes}
+  {...attrs}
 />

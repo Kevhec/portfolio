@@ -23,12 +23,14 @@ const {
   endOnHover,
   easeIn,
   classes,
+  ...attrs
 } = Astro.props;
 ---
 
 <div
   class:list={["animatedElementContainer", classes]}
   style={`--fallback: ${fallback || ''}; --frameWidth: ${frameWidth}px; --frameHeight: ${frameHeight}px; --frameCount: ${frameCount};`}
+  {...attrs}
 >
   <div
     class:list={[

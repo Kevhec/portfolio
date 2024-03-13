@@ -1,0 +1,68 @@
+---
+import Button from './Button.astro';
+import Typography from './Typography.astro';
+import Download from './icon/variants/Download.astro'
+
+const {lang} = Astro.props
+---
+
+<Button
+  as='a'
+  href={lang === 'en' ? '/Curriculum-en.pdf' : '/Curriculum-es.pdf'}
+  download="curriculum"
+  positionAware
+  class={'downloadButton'}
+>
+  CV
+  <!-- <Typography as="p">
+  </Typography> -->
+<!--   <div class="downloadButton__icon">
+    <Download
+      containerId='downloadIcon'
+      arrowId='downloadArrow'
+    />
+  </div> -->
+</Button>
+
+<style lang="scss" is:inline>
+    .downloadButton {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px !important;
+      aspect-ratio: 1 / 1;
+      
+      /* #downloadIcon {
+        width: 25px;
+        height: 25px;
+        transition: all 200ms ease-in;
+      }
+      
+      &:hover {
+        #downloadArrow {
+          animation-name: float;
+          animation-duration: 1000ms;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+
+        #downloadIcon {
+          filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, .5))
+        }
+      } */
+    }
+
+    /* @keyframes float {
+      0% {
+        transform: translateY(0);
+      } 25% {
+        transform: translateY(1px);
+      } 50% {
+        transform: translateY(0);
+      } 75% {
+        transform: translateY(-1px);
+      } 100% {
+        transform: translateY(0);
+      }  
+    } */
+</style>

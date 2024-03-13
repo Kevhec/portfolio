@@ -1,0 +1,14 @@
+---
+interface Props {
+  containerId: string;
+  arrowId: string;
+}
+
+const { containerId, arrowId } = Astro.props;
+---
+
+<svg id={containerId} width="50" height="50" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+  <path d="M4 16 v6 h18 v-6" />
+  <path id={arrowId} d="M13 4 v10 m-4 -4 l4 4 l4 -4" />
+</svg>
+  

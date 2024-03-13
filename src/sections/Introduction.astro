@@ -3,10 +3,10 @@ import Typography from '../components/Typography.astro';
 import Sunflower from '../components/Sunflower.astro';
 import MobileSunflower from '../components/MobileSunflower.astro';
 import Button from '../components/Button.astro';
-import Icon from '../components/icon/Icon.astro';
 import Container from '@components/Container.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import SocialLinks from '@components/SocialLinks.astro';
+import DownloadButton from '@components/DownloadButton.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -16,7 +16,7 @@ const t = useTranslations(lang);
   <section class="introduction">
     <div class="introduction__content">
       <Typography as="h1" weight="regular">
-        <Typography as="span" class="introduction__upper-line">
+        <Typography as="span" class="introduction__upper-line" id='headingGreet'>
           {t('intro.greet')}
         </Typography>
         <Typography as="span" accent weight="semibold" class="introduction__bottom-line">
@@ -28,7 +28,7 @@ const t = useTranslations(lang);
         {t('intro.introduction.2')},<br>
         {t('intro.introduction.3')}<br>
       </Typography>
-      <MobileSunflower />
+      <MobileSunflower refElement='headingGreet' lang={lang} />
       <div class="introduction__buttons">
         <Button
           as='a'
@@ -39,6 +39,7 @@ const t = useTranslations(lang);
         >
           {t('intro.getInTouch')}
         </Button>
+        <DownloadButton lang={lang} />
         <SocialLinks />
       </div>
     </div>
@@ -80,6 +81,7 @@ const t = useTranslations(lang);
       display: flex;
       gap: rem(16);
       align-items: center;
+      flex-wrap: wrap;
     }
   }
 
