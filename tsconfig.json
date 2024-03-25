@@ -23,7 +23,5 @@
         "src/i18n/*"
       ]
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
   }
 }
