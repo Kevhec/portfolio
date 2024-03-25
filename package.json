@@ -11,25 +11,25 @@
     "lint": "eslint . --ext .js,.ts,.astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.5",
-    "@astrojs/sitemap": "^3.0.5",
+    "@astrojs/mdx": "^2.2.1",
+    "@astrojs/sitemap": "^3.1.1",
     "@types/react": "^18.2.69",
     "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "astro": "^4.1.1",
-    "astro-seo": "^0.8.0",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "astro": "^4.5.9",
+    "astro-seo": "^0.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.33.2",
+    "sharp": "^0.33.3",
     "swiper": "^11.0.7"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.1",
-    "@types/node": "^20.10.8",
-    "@typescript-eslint/parser": "^6.18.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-astro": "^0.31.0",
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/parser": "^7.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.33.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "sass": "^1.69.7"
+    "sass": "^1.72.0"
   }
 }
