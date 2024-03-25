@@ -4,6 +4,9 @@ import Container from '@components/Container.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import ProjectHeader from '@components/projectPage/ProjectHeader.astro';
+import Slider from '@components/Slider.astro';
+import { Image } from 'astro:assets';
+import Typography from '@components/Typography.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -36,6 +39,30 @@ const { Content } = await project.render();
         project={project}
       />
       <Content />
+      <Typography as='h2' class="gallery__heading">
+        {t('project.galleryHeading')}
+      </Typography>
+      <Slider>
+        {project.data.galleryImages.map(image => (
+          <swiper-slide>
+            <Image class="gallery__image" src={image.src} alt={image.alt} />
+          </swiper-slide>
+        ))}
+      </Slider>
     </main>
   </Container>
 </Layout>
+
+<style lang="scss">
+  .gallery {
+    &__heading {
+      margin-bottom: 1rem;
+    }
+
+    &__image {
+      margin-inline: auto;
+      object-fit: contain;
+      height: fit-content;
+    }
+  }
+</style>

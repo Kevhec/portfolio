@@ -13,6 +13,12 @@ const projectCollection = defineCollection({
     }),
     mockupAlt: z.string(),
     demoLink: z.string(),
+    galleryImages: z.array(z.object({
+      src: image().refine((img) => img.width >= 375, {
+        message: "Cover image must be at least 1080 pixels wide!",
+      }),
+      alt: z.string(),
+    })),
   }),
 });
 

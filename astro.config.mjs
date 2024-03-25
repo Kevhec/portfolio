@@ -16,16 +16,13 @@ export default defineConfig({
       }
     }
   },
-  integrations: [
-    mdx(),
-    sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en-US',
-          es: 'es-CO'
-        }
+  integrations: [mdx(), sitemap({
+    i18n: {
+      defaultLocale: 'en',
+      locales: {
+        en: 'en-US',
+        es: 'es-CO'
       }
-    })
-  ]
+    }
+  })]
 });

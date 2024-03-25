@@ -2,14 +2,28 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true,
-    "baseUrl": ".",
+    "baseUrl": "C:/Users/al-jo/Documents/programming/web/portfolio",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@types": ["src/types/index.ts"],
-      "@layouts/*": ["src/layouts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@sections/*": ["src/sections/*"],
-      "@i18n/*": ["src/i18n/*"],
-    }
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@types": [
+        "src/types/index.ts"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@sections/*": [
+        "src/sections/*"
+      ],
+      "@i18n/*": [
+        "src/i18n/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

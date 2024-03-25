@@ -8,6 +8,28 @@ stack: ["HTML5", "CSS", "JavaScript"]
 mockup: '@assets/images/mockups/construelectricjv/construelectricjv_1.webp'
 mockupAlt: 'ConstruelectricJV preview image'
 demoLink: 'https://construelectricjv.com'
+galleryImages: [
+  {
+    src: "@assets/images/mockups/construelectricjv/construelectricjv_2.webp",
+    alt: "ConstruelectricJV site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/construelectricjv/construelectricjv_4.webp",
+    alt: "ConstruelectricJV site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/construelectricjv/construelectricjv_5.webp",
+    alt: "ConstruelectricJV site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/construelectricjv/construelectricjv_6.webp",
+    alt: "ConstruelectricJV site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/construelectricjv/construelectricjv_7.webp",
+    alt: "ConstruelectricJV site gallery image 1"
+  },
+]
 ---
 
 import Typography from '@components/Typography.astro';
@@ -32,6 +54,7 @@ export const {
   demoLink,
   stack,
   wasForAClient,
+  galleryImages
 } = frontmatter
 
 <Row paddedRight>
@@ -63,20 +86,4 @@ export const {
   # Things that made it worth it
 
   The fact that it is my first commercial project filled me with enthusiasm, as it represented the first economic reward for doing what I am passionate about, something that, with a lot of effort, I have managed to learn. This motivates me to continue on this path, thereby gaining confidence in my knowledge.
-</Row>
-
-<Row> 
-  # Gallery
-
-  <Gallery>
-    ![ConstruelectricJV site gallery image 1](@assets/images/mockups/construelectricjv/construelectricjv_2.webp)
-
-    ![ConstruelectricJV site gallery image 2](@assets/images/mockups/construelectricjv/construelectricjv_4.webp)
-
-    ![ConstruelectricJV site gallery image 3](@assets/images/mockups/construelectricjv/construelectricjv_5.webp)
-
-    ![ConstruelectricJV site gallery image 4](@assets/images/mockups/construelectricjv/construelectricjv_6.webp)
-
-    ![ConstruelectricJV site gallery image 5](@assets/images/mockups/construelectricjv/construelectricjv_7.webp)
-  </Gallery>
 </Row>
