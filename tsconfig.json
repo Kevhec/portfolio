@@ -5,22 +5,22 @@
     "baseUrl": "C:/Users/al-jo/Documents/programming/web/portfolio",
     "paths": {
       "@components/*": [
-        "src/components/*"
+        "/src/components/*"
       ],
       "@types": [
-        "src/types/index.ts"
+        "/src/types/index.ts"
       ],
       "@layouts/*": [
-        "src/layouts/*"
+        "/src/layouts/*"
       ],
       "@assets/*": [
-        "src/assets/*"
+        "/src/assets/*"
       ],
       "@sections/*": [
-        "src/sections/*"
+        "/src/sections/*"
       ],
       "@i18n/*": [
-        "src/i18n/*"
+        "/src/i18n/*"
       ]
     },
     "jsx": "react-jsx",
