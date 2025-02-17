@@ -19,23 +19,25 @@ interface Props {
 const { images } = Astro.props
 ---
 
-<section class="splide" aria-labelledby="gallery-heading">
+<section>
   <Typography as='h2' class='gallery__heading'>
     {t('project.galleryHeading')}
   </Typography>
 
-  <div class="splide__track">
-    <ul class="splide__list">
-      {
-        images.map((image) => (
-          <li class="splide__slide">
-            <figure class="gallery__figure">
-              <Image class="gallery__image" src={image.src} alt={image.alt} />
-            </figure>
-          </li>
-        ))
-      }
-    </ul>
+  <div class="splide" aria-labelledby="gallery-heading">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          images.map((image) => (
+            <li class="splide__slide">
+              <figure class="gallery__figure">
+                <Image class="gallery__image" src={image.src} alt={image.alt} />
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -45,12 +47,12 @@ const { images } = Astro.props
   }
 
   .gallery {
-    &__figure {
-      display: flex;
-      justify-content: center;
+    &__heading {
+      margin-bottom: 1rem;
     }
 
     &__image {
+      margin-inline: auto;
       object-fit: contain;
       height: fit-content;
     }
