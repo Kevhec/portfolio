@@ -1,34 +1,74 @@
-<swiper-container
-  init="false"
-  id="slider"
->
-  <slot />
-</swiper-container>
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Typography from './Typography.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface ImageType {
+  src: ImageMetadata
+  alt: string
+}
+
+interface Props {
+  images: ImageType[]
+}
+
+const { images } = Astro.props
+---
+
+<section>
+  <Typography as='h2' class='gallery__heading'>
+    {t('project.galleryHeading')}
+  </Typography>
+
+  <div class="splide" aria-labelledby="gallery-heading">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          images.map((image) => (
+            <li class="splide__slide">
+              <figure class="gallery__figure">
+                <Image class="gallery__image" src={image.src} alt={image.alt} />
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .splide {
+    margin-inline: auto;
+  }
+
+  .gallery {
+    &__heading {
+      margin-bottom: 1rem;
+    }
+
+    &__image {
+      margin-inline: auto;
+      object-fit: contain;
+      height: fit-content;
+    }
+  }
+</style>
 
 <script>
-  import { register, type SwiperContainer } from 'swiper/element/bundle';
-import type { SwiperOptions } from 'swiper/types';
-  register();
+  import '@splidejs/splide/css'
+  import Splide from '@splidejs/splide'
 
-  const swiperElement = document.getElementById('slider') as SwiperContainer;
-
-  const swiperParams: SwiperOptions = {
-    slidesPerView: 1,
-    speed: 2000,
-    loop: true,
-    cssMode: true,
-    navigation: true,
-    pagination: true,
-    autoplay: {
-      delay: 8000,
-      pauseOnMouseEnter: true,
-    },
-    spaceBetween: 32,
-    centeredSlides: true,
-  } 
-
-
-  Object.assign(swiperElement, swiperParams)
-
-  swiperElement.initialize();
+  new Splide('.splide', {
+    width: '80%',
+    breakpoints: {
+      1024: {
+        width: '100%'
+      }
+    }
+  }).mount();
 </script>

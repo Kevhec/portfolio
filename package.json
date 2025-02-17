@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/mdx": "^2.2.1",
     "@astrojs/sitemap": "^3.1.1",
+    "@splidejs/splide": "^4.1.4",
     "@types/react": "^18.2.69",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.3.1",

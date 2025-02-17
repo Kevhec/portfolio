@@ -39,30 +39,13 @@ const { Content } = await project.render();
         project={project}
       />
       <Content />
-      <Typography as='h2' class="gallery__heading">
-        {t('project.galleryHeading')}
-      </Typography>
-      <Slider>
-        {project.data.galleryImages.map(image => (
-          <swiper-slide>
-            <Image class="gallery__image" src={image.src} alt={image.alt} />
-          </swiper-slide>
-        ))}
-      </Slider>
+      <Slider
+        images={project.data.galleryImages}
+      />
     </main>
   </Container>
 </Layout>
 
 <style lang="scss">
-  .gallery {
-    &__heading {
-      margin-bottom: 1rem;
-    }
 
-    &__image {
-      margin-inline: auto;
-      object-fit: contain;
-      height: fit-content;
-    }
-  }
 </style>
