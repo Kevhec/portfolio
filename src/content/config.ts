@@ -8,6 +8,7 @@ const projectCollection = defineCollection({
     description: z.string(),
     wasForClient: z.boolean(),
     stack: z.array(z.string()),
+    logo: image(),
     mockup: image().refine((img) => img.width >= 375, {
       message: "Cover image must be at least 1080 pixels wide!",
     }),

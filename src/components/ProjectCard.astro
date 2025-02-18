@@ -3,17 +3,29 @@ import CustomImage from './CustomImage.astro'
 import Typography from './Typography.astro'
 import { getLangFromUrl, useTranslations } from '@i18n/utils'
 import Icon from './icon/Icon.astro';
+import type { CollectionEntry } from 'astro:content';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
 
+interface Props {
+  project: CollectionEntry<'projects'> & { projectHref: string }
+}
+
 const {
-  mockup,
-  mockupAlt,
-  projectName,
-  excerpt,
+  project
+} = Astro.props
+
+const {
+  data: {
+    mockup,
+    mockupAlt,
+    projectName,
+    excerpt,
+  },
+  slug,
   projectHref,
-} = Astro.props 
+} = project
 ---
 
 <div>

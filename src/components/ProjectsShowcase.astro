@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import ProjectCard from './ProjectCard.astro';
+import ProjectThumbnail from './ProjectThumbnail.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[]
+}
+
+const pageLang = getLangFromUrl(Astro.url);
+const t = useTranslations(pageLang);
+
+const {
+  projects
+} = Astro.props;
+
+const projectsWithRef = projects.map((project) => {
+  const { slug } = project;
+  const projectHref = `/${pageLang}/project/${slug.split('/').slice(1)}`
+  return {
+    ...project,
+    projectHref
+  }
+})
+---
+<section id="project-selector-carousel" class="splide projectsShowcase" aria-label={t('projects.mainCarousel.aria')}>
+  <div class="splide__track">
+    <ul class="splide__list restarted-list">
+      {
+        projectsWithRef.map((project) => (
+          <li class="splide__slide projects__listItem">
+            <ProjectCard project={project}/>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="relative">
+    <div class="splide__arrows projectsShowcase__arrows">
+      <button class="splide__arrow splide__arrow--prev projectsShowcase__arrow projectsShowcase__arrow--prev">
+        {"<"}
+      </button>
+      <button class="splide__arrow splide__arrow--next projectsShowcase__arrow projectsShowcase__arrow--next">
+        {">"}
+      </button>
+    </div>
+    <ul class="thumbnails projectsShowcase__thumbnails restarted-list" id="thumbnails">
+      {
+        projectsWithRef.map((project, i, arr) => (
+          <>
+            <li
+              class="thumbnail projectsShowcase__thumbnail"
+              tabindex="0"
+              aria-controls={`project-selector-carousel-slide0${i + 1}`}
+              aria-label={t('projects.mainCarousel.thumbnail.construelectricjv')}
+            >
+              <ProjectThumbnail project={project} />
+            </li>
+            {
+              i < arr.length - 1 && (
+                <div class="divisor" />
+              )
+            }
+          </>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import Splide from '@splidejs/splide'
+
+  const thumbnails = document.querySelectorAll<HTMLLIElement>('.thumbnail.projectsShowcase__thumbnail')
+  let currentThumbnail: HTMLLIElement | undefined
+
+  const showcaseSplide = new Splide("#project-selector-carousel", {
+    pagination: false,
+  })
+
+  function initThumbnail(thumbnail: HTMLLIElement, index: number) {
+    thumbnail.addEventListener('click', () => {
+      showcaseSplide.go(index)
+    })
+  }
+
+  for (let i = 0; i < thumbnails.length; i++) {
+    initThumbnail(thumbnails[i], i)
+  }
+
+  showcaseSplide.on('mounted move', () => {
+    if (currentThumbnail) {
+      currentThumbnail.classList.remove('projectsShowcase__thumbnail--is-active')
+      currentThumbnail.removeAttribute('aria-current')
+    }
+
+    const newCurrentThumbnail = thumbnails[showcaseSplide.index]
+
+    if (newCurrentThumbnail) {
+      newCurrentThumbnail.classList.add('projectsShowcase__thumbnail--is-active')
+      newCurrentThumbnail.setAttribute('aria-current', 'true')
+      currentThumbnail = newCurrentThumbnail
+    }
+  })
+
+  showcaseSplide.mount();
+</script>
+
+<style lang="scss">
+  .projectsShowcase {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+
+    &__thumbnails {
+      display: flex;
+      justify-content: space-evenly;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    &__arrow {
+      background-color: transparent;
+      color: white;
+      transition: all ease-in-out 100ms;
+
+      &--prev {
+        left: 0;
+        transform: translateX(-100%) translateY(-50%);
+      }
+
+      &--next {
+        right: 0;
+        transform: translateX(100%) translateY(-50%);
+      }
+    }
+
+    &__thumbnail {
+      @include flexCenter();
+      flex-grow: 1;
+      opacity: 0.3;
+      padding: 8px 0;
+      transition: opacity ease-in 200ms;
+      cursor: pointer;
+      background-color: #A0522D;
+
+      &:hover:not(&--is-active) {
+        opacity: .6;
+      }
+
+      &--is-active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .divisor {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background-color: white;
+
+  }
+</style>
