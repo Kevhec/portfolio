@@ -12,8 +12,8 @@ import ProjectsShowcase from '@components/ProjectsShowcase.astro';
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
 
-const projects = await getCollection('projects', ({ slug }) => {
-  const [projectLang, _] = slug.split('/');
+const projects = await getCollection('projects', ({ id }) => {
+  const [projectLang, _] = id.split('/');
   return projectLang === pageLang;
 });
 ---

@@ -39,10 +39,13 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
         padding: 0;
         margin-bottom: 8px;
         width: 100%;
-        transition: background-color 200ms ease-in-out;`
+        transition: background-color 200ms ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;`
       }
     >
-      {languages[pageLang]}
+      {languages[pageLang].trim()}
     </Button>
     <div class="language-picker__dropdown">
       <div class="language-picker__list" role="listbox" id="listbox">
@@ -57,8 +60,8 @@ const orderedLanguages = Object.entries(languages).sort((a, b) => {
             ]}
             tabindex="-1"
           >
-              {label}
-            </a>
+            {label}
+          </a>
         ))}
       </div>
     </div>
