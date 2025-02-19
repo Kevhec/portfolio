@@ -1,6 +1,6 @@
 @mixin mediaq($bp) {
   @media screen and (min-width: $bp) {
-    @content  
+    @content
   }
 };
 
@@ -40,4 +40,10 @@
   animation-timing-function: $timingFunction;
   animation-delay: $delay;
   animation-fill-mode: $fillMode;
+}
+
+@mixin flexCenter($display: flex) {
+  display: $display;
+  align-items: center;
+  justify-content: center;
 }

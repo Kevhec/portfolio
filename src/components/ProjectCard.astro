@@ -3,84 +3,135 @@ import CustomImage from './CustomImage.astro'
 import Typography from './Typography.astro'
 import { getLangFromUrl, useTranslations } from '@i18n/utils'
 import Icon from './icon/Icon.astro';
+import type { CollectionEntry } from 'astro:content';
+import ProjectContext from './ProjectContext.astro';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
 
+interface Props {
+  project: CollectionEntry<'projects'> & { projectHref: string }
+}
+
 const {
-  mockup,
-  mockupAlt,
-  projectName,
-  excerpt,
+  project
+} = Astro.props
+
+const {
+  data: {
+    mockup,
+    mockupAlt,
+    projectName,
+    excerpt,
+    galleryImages,
+  },
   projectHref,
-} = Astro.props 
+} = project
 ---
 
-<div>
-  <CustomImage
-    mobileImgUrl={mockup}
-    desktopImgUrl={mockup}
-    alt={mockupAlt}
-  />
-  <Typography as="h3" class="projectCard__heading">
-    {projectName}
-  </Typography>
-  <Typography as="p" class="projectCard__excerpt">
-    {excerpt}
-  </Typography>
-  <a
-    href={projectHref}
-    class="projectCard__link"
+<div class="projectCard relative">
+  <div
+    class="splide splide-element"
+    id={`projectGallery-${projectName}`}
+    data-project={projectName}
+    role="group"
+    aria-label={`${t('projects.showcaseGallery.aria')} ${t('project.name.construelectricjv')}`}
   >
-    <figure>
-      <Icon variant='RightArrow' />
-    </figure>
-    <span>{t("projects.seeProjectLabel")}</span>
-  </a>
+    <div class="splide__track">
+      <ul class="splide__list">
+        {galleryImages.slice(0, 3).map((image) => (
+          <li class="splide__slide">
+            <CustomImage
+              class="projectCard__image"
+              mobileImgUrl={image.src}
+              desktopImgUrl={image.src}
+              alt={image.alt}
+              wFull
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <ProjectContext
+    projectName={projectName}
+    excerpt={excerpt}
+    projectHref={projectHref}
+    classes='projectCard__context'
+  />
 </div>
+
+<script>
+  import Splide from '@splidejs/splide';
+
+  const sliderElements = document.querySelectorAll<HTMLDivElement>('.splide.splide-element');
+
+  sliderElements.forEach((slider) => {
+    const projectName = slider?.dataset.project;
+
+    const projectGallery = new Splide(`#projectGallery-${projectName}`, {
+      pagination: false,
+      pauseOnHover: true,
+      arrows: true,
+      type: 'loop',
+      perPage: 1,
+      drag: false,
+      autoplay: true,
+      interval: 5000,
+      arrowPath: "M31.77 18.23c0.98 0.98 0.98 2.56 0 3.54l-15 15c-0.98 0.98-2.56 0.98-3.54 0s-0.98-2.56 0-3.54L26.48 20L13.23 6.77c-0.98-0.98-0.98-2.56 0-3.54s2.56-0.98 3.54 0l15 15z",
+      classes: {
+        arrows: 'splide__arrows projectCard__arrows',
+        arrow: 'splide__arrow projectCard__arrow',
+        prev: 'splide__arrow--prev projectCard__arrow--prev',
+        next: 'splide__arrow--next projectCard__arrow--next'
+      }
+    })
+
+    projectGallery.mount();
+  })
+</script>
 
 <style lang="scss">
   .projectCard {
+    position: relative;
 
-    &__heading {
-      margin: rem(8) 0 rem(4);
-    }
-
-    &__excerpt {
-      margin-bottom: rem(4);
-    }
-
-    &__link {
-      display: flex;
+    &__arrow {
       position: relative;
-      gap: rem(8);
-      align-items: center;
-      text-decoration: none;
-      line-height: 1;
-      width: fit-content;
-      color: inherit;
-      transition: gap 200ms ease;
-      padding-right: 10px;
-      overflow: visible;
-
-      > * {
-        position: relative;
-      }
-
-      figure {
-        transition: padding-left 200ms ease-out;
-      }
-
-      &:hover, &:focus {
-        gap: rem(12);
-        figure {
-          padding-left: 10px;
-        }
-      }
-
-      &:focus {
-        outline: 1px solid $neutral-white;
-      }
+      top: 0;
     }
+  }
+  :global(.projectCard__context) {
+    @include mediaq($bp_tablet) {
+      display: none;
+    }
+  }
+
+  :global(.projectCard) {
+    position: relative;
+  }
+
+  :global(.projectCard__arrows) {
+    padding: rem(4) rem(8);
+    border-radius: 55555px;
+    display: flex;
+    gap: rem(8);
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    height: fit-content;
+    width: min-content;
+    background-color: $primary-light-beige;
+    z-index: 10;
+    opacity: 0.8;
+  }
+  
+  :global(.projectCard__arrow) {
+    padding: rem(4);
+    position: unset;
+    width: 20px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    transform: unset;
+    background-color: unset;
   }
 </style>

@@ -4,6 +4,7 @@ import LanguagePicker from '@components/LanguagePicker.astro';
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import Footer from '@sections/Footer.astro';
+import '@splidejs/splide/css';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

@@ -11,6 +11,8 @@ import RightArrow from './variants/RightArrow.astro';
 import Sass from './variants/Sass.astro';
 import Tailwind from './variants/Tailwind.astro';
 import TypeScript from './variants/TypeScript.astro';
+import ChevronLeft from './variants/ChevronLeft.astro';
+import ChevronRight from './variants/ChevronRight.astro';
 
 type Variant =
   | 'ExternalLink'
@@ -25,6 +27,8 @@ type Variant =
   | 'Sass'
   | 'Tailwind'
   | 'TypeScript'
+  | 'ChevronLeft'
+  | 'ChevronRight'
 
 interface Props {
   variant: Variant
@@ -45,6 +49,8 @@ const iconMap: Record<Variant, any> = {
   Sass,
   Tailwind,
   TypeScript,
+  ChevronLeft,
+  ChevronRight,
 }
 
 const SelectedIcon = iconMap[variant];
@@ -54,3 +60,9 @@ const SelectedIcon = iconMap[variant];
     <SelectedIcon />
   )
 }
+
+<style>
+  svg {
+    stroke: inherit;
+  }
+</style>
