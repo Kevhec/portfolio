@@ -1,36 +1,33 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/Container.astro';
-import { getCollection } from 'astro:content';
-import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { getCollection, render } from 'astro:content';
 import ProjectHeader from '@components/projectPage/ProjectHeader.astro';
 import Slider from '@components/Slider.astro';
-import { Image } from 'astro:assets';
-import Typography from '@components/Typography.astro';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 export async function getStaticPaths() {
-  const pages = await getCollection('projects');
+  const projects = await getCollection('projects');
 
-  const paths = pages.map((page) => {
-    const [lang, ...slug] = page.slug.split('/');
+  const paths = projects.map((project) => {
+    const [lang, slug] = project.id.split('/');
+    console.log(project.id)
     return {
       params: {
         lang,
-        slug: slug.join('/') || undefined,
+        slug,
       },
-      props: page,
+      props: { project },
     };
   });
+
+  console.log(paths)
 
   return paths;
 }
 
-const project = Astro.props;
+const { project } = Astro.props;
 
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
 <Layout title={project.data.title}>
   <Container>

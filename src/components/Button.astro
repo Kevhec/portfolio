@@ -17,7 +17,8 @@ type Props<Tag extends Variants> = Polymorphic<{
   positionAware?: boolean
   noBorder?: boolean
   inline?: boolean
-  spanColor?: string
+  variant?: 'dark' | 'light'
+  font?: 'lora' | 'quicksand'
 }>
 
 const {
@@ -29,7 +30,8 @@ const {
   positionAware,
   noBorder,
   inline,
-  spanColor,
+  variant = 'light',
+  font = 'lora',
   ...attrs
 } = Astro.props;
 ---
@@ -39,7 +41,9 @@ const {
   {...attrs}
   class:list={[
     'button',
+    `button--${font}`,
     {
+      [`button--${variant}`]: variant && !(iconOnly || textOnly || noBorder),
       'button--iconOnly': iconOnly,
       'button--positionAware': positionAware,
       'button--textOnly': textOnly,
@@ -50,26 +54,34 @@ const {
   target={newTab ? '_blank' : '_self'}
   rel={newTab ? 'noreferrer' : null}
 >
-  {positionAware && <span class="button__span" />}
+  {
+    positionAware && (
+      <span
+        class:list={[
+          "button__span",
+          {
+            [`button__span--${variant}`]: variant
+          }
+        ]}
+      />
+    )
+  }
   <slot />
 </Tag>
 
-<style lang="scss" define:vars={{spanColor}}>
+<style lang="scss">
   .button {
     display: flex;
     gap: rem(8);
     position: relative;
     overflow: hidden;
-    font-family: $lora;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
-    color: $primary-light-beige;
     z-index: 10;
 
     &:not(.button--iconOnly):not(.button--textOnly):not(.button--noBorder) {
       padding: rem(8) rem(16);
-      border: 1px solid $primary-light-beige;
       border-radius: 9999px;
     }
 
@@ -80,11 +92,28 @@ const {
 
     &--positionAware {
       &:hover, &:focus {
-        outline: unset;
         span {
           @include size(225%, calc(var(--button-width)*2.25))
         }
       }
+    }
+
+    &--light {
+      color: $primary-light-beige;
+      outline: 1px solid $primary-light-beige;
+    }
+    
+    &--dark {
+      color: $primary-green;
+      outline: 1px solid $primary-green;
+    }
+
+    &--lora {
+      font-family: $lora;
+    }
+
+    &--quicksand {
+      font-family: $quicksand;
     }
 
     &__span {
@@ -94,11 +123,18 @@ const {
       left: var(--left);
       transform: translate(-50%, -50%);
       @include size(0);
-      background-color: var(--spanColor, rgba(225, 230, 224, 0.2));
       transition-property: width, height;
       transition-duration: 0.4s, 0.4s;
       transition-timing-function: ease-in-out, ease-in-out;
       z-index: 9;
+      
+      &--light {
+        background-color: rgba(225, 230, 224, 0.2);
+      }
+
+      &--dark {
+        background-color: rgba(74, 72, 76, 0.2);
+      }
     }
 
     &--inline {
@@ -129,8 +165,8 @@ const {
     const offsetX = mouseEvent?.offsetX
     const offsetY = mouseEvent?.offsetY
 
-    span.style.setProperty('--left', `${offsetX}px`);
-    span.style.setProperty('--top', `${offsetY}px`);
+    span.style.setProperty('--left', offsetX ? `${offsetX}px` : "50%");
+    span.style.setProperty('--top', offsetY ? `${offsetY}px` : "50%");
   };
 
   const applyButtonsVariables = () => {

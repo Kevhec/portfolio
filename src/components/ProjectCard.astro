@@ -19,8 +19,6 @@ const {
 
 const {
   data: {
-    mockup,
-    mockupAlt,
     projectName,
     excerpt,
     galleryImages,
@@ -53,12 +51,6 @@ const {
       </ul>
     </div>
   </div>
-  <ProjectContext
-    projectName={projectName}
-    excerpt={excerpt}
-    projectHref={projectHref}
-    classes='projectCard__context'
-  />
 </div>
 
 <script>
@@ -72,7 +64,6 @@ const {
     const projectGallery = new Splide(`#projectGallery-${projectName}`, {
       pagination: false,
       pauseOnHover: true,
-      arrows: true,
       type: 'loop',
       perPage: 1,
       drag: false,
@@ -124,7 +115,7 @@ const {
     z-index: 10;
     opacity: 0.8;
   }
-  
+
   :global(.projectCard__arrow) {
     padding: rem(4);
     position: unset;

@@ -18,15 +18,23 @@ const {
 } = Astro.props;
 
 const projectsWithRef = projects.map((project) => {
-  const { slug } = project;
-  const projectHref = `/${pageLang}/project/${slug.split('/').slice(1)}`
+  const { id } = project;
+  const projectHref = `/${pageLang}/project/${id.split('/').slice(1)}`
   return {
     ...project,
     projectHref
   }
 })
 ---
-<section id="project-selector-carousel" class="splide projectsShowcase" aria-label={t('projects.mainCarousel.aria')}>
+<section id="project-selector-carousel" class="splide projectsShowcase relative" aria-label={t('projects.mainCarousel.aria')}>
+  <div class="splide__arrows projectsShowcase__arrows">
+    <button class="splide__arrow splide__arrow--prev projectsShowcase__arrow projectsShowcase__arrow--prev">
+      <Icon variant='ChevronRight' />
+    </button>
+    <button class="splide__arrow splide__arrow--next projectsShowcase__arrow projectsShowcase__arrow--next">
+      <Icon variant='ChevronRight' />
+    </button>
+  </div>
   <div class="splide__track projectsShowcase__gallery">
     <ul class="splide__list restarted-list">
       {
@@ -39,50 +47,40 @@ const projectsWithRef = projects.map((project) => {
     </ul>
   </div>
   <div class="projectsShowcase__data-container relative">
-    <div class="relative">
-      <div class="splide__arrows projectsShowcase__arrows">
-        <button class="splide__arrow splide__arrow--prev projectsShowcase__arrow projectsShowcase__arrow--prev">
-          <Icon variant='ChevronRight' />
-        </button>
-        <button class="splide__arrow splide__arrow--next projectsShowcase__arrow projectsShowcase__arrow--next">
-          <Icon variant='ChevronRight' />
-        </button>
-      </div>
-      <ul class="thumbnails projectsShowcase__thumbnails restarted-list" id="thumbnails">
-        {
-          projectsWithRef.map((project, i) => (
-            <li
-              class="thumbnail projectsShowcase__thumbnail"
-              tabindex="0"
-              aria-controls={`project-selector-carousel-slide0${i + 1}`}
-              aria-label={t('projects.mainCarousel.thumbnail.construelectricjv')}
-            >
-              <ProjectThumbnail project={project} />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-    <section
-    id={`context-carousel`}
-    class="splide projectsShowcase__contextSplide"
-    aria-label={t('project.context.aria')}
-  >
-    <div class="splide__track">
-      <ul class="splide__list restarted-list">
-        {projectsWithRef.map((project) => (
-          <li class="splide__slide">
-            <ProjectContext
-              projectName={project.data.projectName}
-              projectHref={project.projectHref}
-              excerpt={project.data.excerpt}
-              classes='projectsShowcase__context'
-            />
+    <ul class="thumbnails projectsShowcase__thumbnails restarted-list" id="thumbnails">
+      {
+        projectsWithRef.map((project, i) => (
+          <li
+            class="thumbnail projectsShowcase__thumbnail"
+            tabindex="0"
+            aria-controls={`project-selector-carousel-slide0${i + 1}`}
+            aria-label={t('projects.mainCarousel.thumbnail.construelectricjv')}
+          >
+            <ProjectThumbnail project={project} />
           </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+        ))
+      }
+    </ul>
+    <section
+      id={`context-carousel`}
+      class="splide projectsShowcase__contextSplide"
+      aria-label={t('project.context.aria')}
+    >
+      <div class="splide__track">
+        <ul class="splide__list restarted-list">
+          {projectsWithRef.map((project) => (
+            <li class="splide__slide">
+              <ProjectContext
+                projectName={project.data.projectName}
+                projectHref={project.projectHref}
+                excerpt={project.data.excerpt}
+                classes='projectsShowcase__context'
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   </div>
 </section>
 
@@ -146,26 +144,25 @@ const projectsWithRef = projects.map((project) => {
   .projectsShowcase {
     display: flex;
     flex-direction: column;
-    gap: rem(32);
 
     @include mediaq($bp-tablet) {
+      gap: rem(8);
       display: grid;
       grid-template-columns: 2fr 1fr;
     }
 
     &__gallery {
-      border-radius: 8px;
+      border-radius: 8px 8px 0px 0px;
       overflow: hidden;
       border: 4px solid $primary-light-beige;
 
       @include mediaq($bp-tablet) {
+        border-radius: 8px;
         grid-column: 1 / 2;
       }
     }
 
     &__contextSplide {
-      display: none;
-
       & * {
         height: 100%;
       }
@@ -177,6 +174,10 @@ const projectsWithRef = projects.map((project) => {
     }
 
     &__data-container {
+      display: flex;
+      gap: rem(8);
+      flex-direction: column-reverse;
+
       @include mediaq($bp-tablet) {
         display: grid;
         grid-template-rows: min-content 1fr;
@@ -198,15 +199,25 @@ const projectsWithRef = projects.map((project) => {
     }
 
     &__arrows {
-      top: 0;
+      position: absolute;
+      top: unset;
+      width: 100%;
+      bottom: 0;
+      transform: unset;
+
+      @include mediaq($bp-tablet) {
+        top: 0;
+        bottom: unset;
+        right: 0;
+      }
     }
 
     &__arrow {
-      $translationX: 160%;
-      $translationY: -25%;
+      $translationX: 115%;
+      $translationY: -85%;
       $arrow-size: rem(24);
       $icon-size: rem(12);
-      
+
       @include flexCenter();
       top: -$arrow-size;
       width: $arrow-size;
@@ -223,14 +234,24 @@ const projectsWithRef = projects.map((project) => {
       }
 
       &--prev {
-        right: 0;
-        left: unset;
+        left: 0;
         transform: translateX(-$translationX) translateY($translationY);
-      }
 
+        @include mediaq($bp-tablet) {
+          left: unset;
+          right: 0;
+          transform: translateX(-$translationX) translateY(-20%);
+        }
+      }
+      
       &--next {
         right: 0;
-        transform: translateY($translationY);
+        transform: translateX($translationX) translateY($translationY);
+
+        @include mediaq($bp-tablet) {
+          right: 0;
+          transform: translateY(-20%);
+        }
       }
     }
 

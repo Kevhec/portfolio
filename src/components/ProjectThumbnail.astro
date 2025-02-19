@@ -83,7 +83,8 @@ const {
 
       @include mediaq($bp_tablet) {
         display: block;
-        font-size: rem(16);
+        // TODO: Check how to solve this important on production
+        font-size: rem(16) !important;
         font-weight: 400;
       }
     }

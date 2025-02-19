@@ -31,7 +31,13 @@ const {
       {excerpt}
     </Typography>
   </div>
-  <Button as='a' href={projectHref} positionAware class="project-context__link" spanColor='rgba(74, 72, 76, 0.2)'>
+  <Button as='a'
+    href={projectHref}
+    positionAware
+    class="project-context__link"
+    variant='dark'
+    font='quicksand'
+  >
     <figure>
       <Icon variant='RightArrow' />
     </figure>
@@ -41,13 +47,15 @@ const {
 
 <style lang="scss">
   .project-context {
+    color: $primary-green;
+    background-color: $primary-light-beige;
+    height: 100%;
+    width: 100%;
+    padding: rem(16);
+    border-radius: 0 0 8px 8px;
+
     @include mediaq($bp-tablet) {
-      height: 100%;
-      width: 100%;
-      padding: rem(16);
       border-radius: 8px;
-      color: $primary-green;
-      background-color: $primary-light-beige;
     }
 
     &__heading {
@@ -64,12 +72,8 @@ const {
     }
 
     &__link {
-      color: $primary-green;
-      font-family: $quicksand;
-      background-color: transparent;
       width: fit-content;
       align-self: flex-end;
-      outline: 1px solid $primary-green !important;
     }
   }
 </style>
