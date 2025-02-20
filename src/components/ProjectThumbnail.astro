@@ -1,20 +1,25 @@
 ---
-import { Image } from 'astro:assets'
-import type { CollectionEntry } from 'astro:content'
-import Typography from './Typography.astro'
-import Icon from './icon/Icon.astro'
-import { getLangFromUrl, useTranslations } from '@i18n/utils'
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+import Icon from './icon/Icon.astro';
+import Typography from './Typography.astro';
 
 interface Props {
   project: CollectionEntry<'projects'> & { projectHref: string }
+  darkLogo?: boolean
 }
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
 
 const {
-  project
-} = Astro.props
+  project,
+  darkLogo = false,
+} = Astro.props;
+
+const logoContrastBackground = darkLogo ? '#1b1b1b' : 'white';
 
 const {
   data: {
@@ -22,7 +27,7 @@ const {
     logo,
   },
   projectHref,
-} = project
+} = project;
 ---
 
 <div class="projectThumbnail">
@@ -46,12 +51,12 @@ const {
       <figure>
         <Icon variant='RightArrow' />
       </figure>
-      <span class="visually-hidden">{t("projects.seeProjectLabel")}</span>
+      <span class="visually-hidden">{t('projects.seeProjectLabel')}</span>
     </a>
   </div>
 </div>
 
-<style lang="scss">
+<style lang="scss" define:vars={{ logoContrastBackground }}>
   .projectThumbnail {
     @include flexCenter();
     display: flex;
@@ -110,7 +115,7 @@ const {
         height: auto;
         position: absolute;
         aspect-ratio: 1 / 1;
-        background-color: $primary-light-beige;
+        background-color: var(--logoContrastBackground);
         border-radius: 50%;
         padding: rem(8);
         z-index: 1;
