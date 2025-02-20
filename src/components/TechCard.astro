@@ -7,8 +7,10 @@ import html5Svg from '@assets/svg/html5.svg';
 import javaScriptSvg from '@assets/svg/javascript.svg';
 import leafletSvg from '@assets/svg/leaflet.svg';
 import nextJSSvg from '@assets/svg/nextjs.svg';
+import nodeSvg from '@assets/svg/node.svg';
 import reactSvg from '@assets/svg/react.svg';
 import sassSvg from '@assets/svg/sass.svg';
+import sequelizeSvg from '@assets/svg/sequelize.svg';
 import tailwindSvg from '@assets/svg/tailwindcss.svg';
 import typeScriptSvg from '@assets/svg/typescript.svg';
 import type { TechsList } from '@types';
@@ -37,6 +39,8 @@ const techsSvgMapping = {
   HTML5: html5Svg,
   CSS: cssSvg,
   Express: expressSvg,
+  Node: nodeSvg,
+  Sequelize: sequelizeSvg,
 };
 
 const techSvg = techsSvgMapping[tech as keyof typeof techsSvgMapping];
@@ -104,6 +108,7 @@ const techSvg = techsSvgMapping[tech as keyof typeof techsSvgMapping];
 
     &__icon {
       width: 50px;
+      height: auto  ;
       aspect-ratio: 1 / 1;
 
       * {
@@ -130,7 +135,8 @@ const techSvg = techsSvgMapping[tech as keyof typeof techsSvgMapping];
       }
 
       .techCard__icon {
-        width: rem(102.4);
+        width: rem(100);
+        height: rem(100);
       }
     }
   }
