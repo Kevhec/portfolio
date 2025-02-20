@@ -1,10 +1,11 @@
 ---
+import '@splidejs/splide/css';
+
 import Container from '@components/Container.astro';
 import LanguagePicker from '@components/LanguagePicker.astro';
-import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import Footer from '@sections/Footer.astro';
-import '@splidejs/splide/css';
+import { SEO } from 'astro-seo';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,24 +13,24 @@ const t = useTranslations(lang);
 
 <!doctype html>
 <html lang={lang}>
-	<head>
+  <head>
     <SEO
       title={t('SEO.title')}
       description={t('SEO.description')}
       twitter={{
-        creator: '@Kev_Hec'
+        creator: '@Kev_Hec',
       }}
     />
-		<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#214537">
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
     <slot name="additional-meta-head-info" />
-	</head>
-	<body>
+  </head>
+  <body>
     <header>
       <Container noPadded>
         <div class="languagepicker">
@@ -39,7 +40,7 @@ const t = useTranslations(lang);
     </header>
     <slot />
     <Footer />
-	</body>
+  </body>
 </html>
 <style lang="scss" is:global>
   body {

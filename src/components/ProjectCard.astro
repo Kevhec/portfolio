@@ -1,10 +1,8 @@
 ---
-import CustomImage from './CustomImage.astro'
-import Typography from './Typography.astro'
-import { getLangFromUrl, useTranslations } from '@i18n/utils'
-import Icon from './icon/Icon.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import type { CollectionEntry } from 'astro:content';
-import ProjectContext from './ProjectContext.astro';
+
+import CustomImage from './CustomImage.astro';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
@@ -14,17 +12,15 @@ interface Props {
 }
 
 const {
-  project
-} = Astro.props
+  project,
+} = Astro.props;
 
 const {
   data: {
     projectName,
-    excerpt,
     galleryImages,
   },
-  projectHref,
-} = project
+} = project;
 ---
 
 <div class="projectCard relative">
@@ -69,7 +65,10 @@ const {
       drag: false,
       autoplay: true,
       interval: 5000,
-      arrowPath: "M31.77 18.23c0.98 0.98 0.98 2.56 0 3.54l-15 15c-0.98 0.98-2.56 0.98-3.54 0s-0.98-2.56 0-3.54L26.48 20L13.23 6.77c-0.98-0.98-0.98-2.56 0-3.54s2.56-0.98 3.54 0l15 15z",
+      arrowPath: `M31.77 18.23c0.98 0.98 0.98 2.56 0 3.54l-15 15c-0.98
+                  0.98-2.56 0.98-3.54 0s-0.98-2.56 0-3.54L26.48 20L13.23
+                  6.77c-0.98-0.98-0.98-2.56 0-3.54s2.56-0.98 3.54 0l15 15z
+                  `,
       classes: {
         arrows: 'splide__arrows projectCard__arrows',
         arrow: 'splide__arrow projectCard__arrow',
@@ -90,15 +89,6 @@ const {
       position: relative;
       top: 0;
     }
-  }
-  :global(.projectCard__context) {
-    @include mediaq($bp_tablet) {
-      display: none;
-    }
-  }
-
-  :global(.projectCard) {
-    position: relative;
   }
 
   :global(.projectCard__arrows) {

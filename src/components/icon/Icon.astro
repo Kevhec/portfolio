@@ -13,6 +13,11 @@ import Tailwind from './variants/Tailwind.astro';
 import TypeScript from './variants/TypeScript.astro';
 import ChevronLeft from './variants/ChevronLeft.astro';
 import ChevronRight from './variants/ChevronRight.astro';
+import Node from './variants/Node.astro';
+import Postgres from './variants/Postgres.astro';
+import Sequelize from './variants/Sequelize.astro';
+import Express from './variants/Express.astro';
+
 
 type Variant =
   | 'ExternalLink'
@@ -29,6 +34,10 @@ type Variant =
   | 'TypeScript'
   | 'ChevronLeft'
   | 'ChevronRight'
+  | 'Node'
+  | 'Postgres'
+  | 'Sequelize'
+  | 'Express'
 
 interface Props {
   variant: Variant
@@ -51,6 +60,10 @@ const iconMap: Record<Variant, any> = {
   TypeScript,
   ChevronLeft,
   ChevronRight,
+  Node,
+  Postgres,
+  Sequelize,
+  Express,
 }
 
 const SelectedIcon = iconMap[variant];

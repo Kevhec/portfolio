@@ -1,0 +1,86 @@
+---
+title: 'Project - ConstruelectricJV'
+projectName: 'Budmin'
+excerpt: 'Landing page for an electrical and plumbing company based in Chile.'
+description: 'ConstruelectricJV - Electrical and plumbing services company based in Chile.'
+wasForClient: true
+logo: '@assets/images/logos/budmin.svg'
+stack: ["HTML5", "CSS", "JavaScript"]
+mockup: '@assets/images/mockups/budmin/budmin-en_1.webp'
+mockupAlt: 'ConstruelectricJV preview image'
+demoLink: 'https://construelectricjv.com'
+galleryImages: [
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_1.webp",
+    alt: "budmin-en site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_2.webp",
+    alt: "budmin-en site gallery image 2"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_3.webp",
+    alt: "budmin-en site gallery image 3"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_4.webp",
+    alt: "ConstruelectricJV site gallery image 4"
+  },
+]
+---
+
+import Typography from '@components/Typography.astro';
+import Row from '@components/projectPage/Row.astro';
+import List from '@components/projectPage/List.astro';
+import TechCard from '@components/TechCard.astro';
+import Gallery from '@components/projectPage/Gallery.astro';
+
+export const components = {
+  h1: (props) => <Typography as="h2" {...props} class="lora" />,
+  h2: (props) => <Typography as="h3" {...props} />,
+  h3: (props) => <Typography as="h4" {...props} />,
+  p: (props) => <Typography as="p" {...props} />,
+  ul: List,
+}
+
+export const {
+  title,
+  excerpt,
+  mockup,
+  mockupAlt,
+  demoLink,
+  stack,
+  wasForAClient,
+  galleryImages
+} = frontmatter
+
+<Row paddedRight>
+  # What makes this unique
+
+  This was my first commercial project, so I hold it in high regard. Additionally, I had the opportunity to share my knowledge with a colleague during the site development process, which brings me satisfaction, as contributing to the knowledge of others enriches my soul.
+
+  Furthermore, I seized the chance to learn the basics of SEO in order to enhance the site's visibility, nurturing my passion for continuous learning.
+</Row>
+
+<Row evenColumns inverted>
+  <div>
+    <div>
+      # Why these technologies
+
+      As mentioned earlier, this project was developed with the support of a colleague to whom I could share basic knowledge in web development. For this reason, I considered it prudent to choose a basic technological stack, yet following best practices to, even given the circumstances, deliver a professional product.
+    </div>
+  </div>
+  <div>
+    {
+      stack.map(tech => (
+        <TechCard tech={tech} />
+      ))
+    }
+  </div>
+</Row>
+
+<Row paddedRight>
+  # Things that made it worth it
+
+  The fact that it is my first commercial project filled me with enthusiasm, as it represented the first economic reward for doing what I am passionate about, something that, with a lot of effort, I have managed to learn. This motivates me to continue on this path, thereby gaining confidence in my knowledge.
+</Row>
