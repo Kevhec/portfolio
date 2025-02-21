@@ -1,34 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
-import { getLangFromUrl, useTranslations } from '@i18n/utils'
-import _slug_ from 'src/pages/[lang]/project/[slug].astro';
 import Container from '@components/Container.astro';
-import Typography from '@components/Typography.astro';
-import ProjectCard from '@components/ProjectCard.astro';
-import { Image } from 'astro:assets';
-import ProjectThumbnail from '@components/ProjectThumbnail.astro';
 import ProjectsShowcase from '@components/ProjectsShowcase.astro';
+import Typography from '@components/Typography.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { getCollection } from 'astro:content';
 
 const pageLang = getLangFromUrl(Astro.url);
 const t = useTranslations(pageLang);
 
 const projects = await getCollection('projects', ({ id }) => {
-  const [projectLang, _] = id.split('/');
+  const [projectLang] = id.split('/');
   return projectLang === pageLang;
 });
 ---
 <Container>
   <div class="projects__innerContainer">
     <Typography as='h2' class="projects__heading line-height-1">
-      {t("projects.heading")}
+      {t('projects.heading')}
     </Typography>
     <ProjectsShowcase projects={projects} />
   </div>
 </Container>
-
-<script>
-
-</script>
 
 <style lang="scss">
   .projects {

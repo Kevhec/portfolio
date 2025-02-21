@@ -28,17 +28,17 @@ const {
 ---
 
 <div
-  class:list={["animatedElementContainer", classes]}
-  style={`--fallback: ${fallback || ''}; --frameWidth: ${frameWidth}px; --frameHeight: ${frameHeight}px; --frameCount: ${frameCount};`}
+  class:list={['animatedElementContainer', classes]}
+  style={`--fallback: ${fallback ?? ''}; --frameWidth: ${frameWidth}px; --frameHeight: ${frameHeight}px; --frameCount: ${frameCount};`}
   {...attrs}
 >
   <div
     class:list={[
-      "animated",
+      'animated',
       {
         'animated--easeIn': easeIn,
-        'animated--endOnHover': endOnHover
-      }
+        'animated--endOnHover': endOnHover,
+      },
     ]}
     style={`--spriteSheetWidth: -${spriteSheetWidth}px; --animationDuration: ${animationDuration}; background: url(${spriteSheet});`}
     data-end-on-hover={`${endOnHover}`}
@@ -66,16 +66,15 @@ const {
     width: 100%;
     height: 100%;
     animation-name: sprite;
+    animation-duration: var(--animationDuration);
+    animation-timing-function: steps(var(--frameCount), start);
+    animation-fill-mode: forwards;
 
     &--easeIn {
       animation-name: spriteEaseIn;
       animation-delay: 2s;
       opacity: 0;
     }
-
-    animation-duration: var(--animationDuration);
-    animation-timing-function: steps(var(--frameCount), start);
-    animation-fill-mode: forwards;
   }
 
   .fallback {
@@ -151,7 +150,7 @@ const {
   container.forEach(container => {
     const animatedElement: HTMLDivElement | null = container.querySelector('.animated')
     const fallbackElement: HTMLDivElement | null = container.querySelector('.fallback')
-  
+
     if (!animatedElement || !fallbackElement) return
 
     animatedElement.addEventListener('animationend', () => {

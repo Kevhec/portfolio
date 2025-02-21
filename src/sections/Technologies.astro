@@ -8,7 +8,18 @@ import type { TechsList } from '@types';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const techs: TechsList[] = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Git', 'Sass']
+const techs: TechsList[] = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Next.js',
+  'Tailwind CSS',
+  'Git',
+  'Sass',
+  'Node',
+  'Express',
+  'Sequelize'
+]
 ---
 
 <Container>
@@ -32,7 +43,6 @@ const techs: TechsList[] = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tai
 
     &__heading {
       width: 100%;
-      text-align: center;
       margin-bottom: rem(19);
 
       @include mediaq($bp-tablet) {
@@ -50,7 +60,8 @@ const techs: TechsList[] = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tai
       gap: 1rem;
 
       @include mediaq($bp-tablet) {
-        justify-content: center;
+        max-width: unset;
+        justify-content: unset;
       }
     }
   }

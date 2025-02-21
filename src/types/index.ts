@@ -10,3 +10,7 @@ export type TechsList =
   | 'Leaflet'
   | 'HTML5'
   | 'CSS'
+  | 'Node'
+  | 'Postgres'
+  | 'Sequelize'
+  | 'Express';

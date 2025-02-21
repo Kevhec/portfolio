@@ -1,0 +1,91 @@
+---
+title: 'Proyecto - Budmin'
+comingSoon: true
+projectName: 'Budmin'
+excerpt: 'Administrador de finanzas personales con sistema de recurrencia. Mantén el control de tu dinero y tus suscripciones.'
+description: 'Administrador de finanzas personales con sistema de recurrencia. Mantén el control de tu dinero y tus suscripciones.'
+wasForClient: false
+logo: '@assets/images/logos/budmin.svg'
+stack: ["React", "Tailwind CSS", "React router", "Shadcn", "Node", "Express", "Sequelize", "Postgres SQL", "TypeScript"]
+mockup: '@assets/images/mockups/budmin/budmin-es_1.webp'
+mockupAlt: 'Vista previa de Budmin'
+galleryImages: [
+  {
+    src: "@assets/images/mockups/budmin/budmin-es_1.webp",
+    alt: "budmin-es site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-es_2.webp",
+    alt: "budmin-es site gallery image 2"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-es_3.webp",
+    alt: "budmin-es site gallery image 3"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-es_4.webp",
+    alt: "ConstruelectricJV site gallery image 4"
+  },
+]
+---
+
+import Typography from '@components/Typography.astro';
+import Row from '@components/projectPage/Row.astro';
+import Column from '@components/projectPage/Column.astro';
+import List from '@components/projectPage/List.astro';
+import TechCard from '@components/TechCard.astro';
+import Gallery from '@components/projectPage/Gallery.astro';
+
+export const components = {
+  h1: (props) => <Typography as="h2" {...props} class="lora" />,
+  h2: (props) => <Typography as="h3" {...props} />,
+  h3: (props) => <Typography as="h4" {...props} />,
+  p: (props) => <Typography as="p" {...props} />,
+  ul: List,
+}
+
+export const {
+  title,
+  excerpt,
+  mockup,
+  mockupAlt,
+  demoLink,
+  stack,
+  wasForAClient,
+  galleryImages
+} = frontmatter
+
+<Row paddedRight>
+  # Qué lo hace único
+
+  Este proyecto nació de la necesidad de gestionar las finanzas de mi madre y ayudarla a ser más consciente de sus gastos. Inicialmente, busqué una aplicación existente que cumpliera con mis requisitos, pero descubrí que la mayoría eran de pago o requerían una suscripción premium para acceder a las funciones que necesitaba. Esto me llevó a tomar la decisión de construir mi propia aplicación, adaptada específicamente a mis necesidades y, al mismo tiempo, desafiando mis habilidades de desarrollo. Y así, el proyecto comenzó.
+</Row>
+
+<Row evenColumns inverted>
+  <div>
+    # Por qué estas tecnologías
+
+    Para lograr las funcionalidades deseadas, sabía que debía implementar tanto el backend como el frontend. Por ello, elegí herramientas familiares como **Node.js** y **Express.js** como base para el backend, y **React** para el frontend.
+    <br/>
+    Enfocándome en el frontend, dado su carácter de dashboard, opté por **React** no solo por su idoneidad, sino también como una oportunidad para mejorar mis habilidades. Implementé un sistema de gestión de estado robusto utilizando la **Context API** y el hook `useReducer`, creando acciones modulares para cada contexto. Para el enrutamiento, seleccioné **React Router** debido a sus potentes capacidades y su API sencilla, lo que me permitió definir rutas claras y mantener un código modular y DRY-friendly. Para la UI, aproveché el sistema de componentes **Shadcn**, que me impresionó por su alto grado de personalización y control, especialmente al manejar envíos de formularios y validaciones gracias a su compatibilidad con `zod` y `react-hook-form`.
+    <br/>
+    Dado que mi experiencia con el desarrollo backend era limitada, consideré que **Express.js** era una buena opción para comenzar mi aprendizaje. Aproveché su sistema de enrutamiento integrado y su arquitectura basada en middlewares. En particular, utilicé middlewares para tareas como la verificación de *autenticación*, la validación de datos con **zod** y el control de acceso a recursos para operaciones en la base de datos.
+    <br/>
+    Para mi base de datos, elegí **Postgres SQL** debido a su alta popularidad y su amplia variedad de tipos de datos, y utilicé el **ORM Sequelize** para simplificar las operaciones con su completo conjunto de APIs. Además, implementé un sistema basado en cron con **node-cron** para gestionar transacciones y presupuestos basados en suscripciones, y por último adopté el patrón de arquitectura MVC (Modelo-Vista-Controlador) para la estructura de mi código.
+  </div>
+  <Column subColumns={2} as='ul'>
+    {
+      stack.map(tech => (
+        <li>
+          <TechCard tech={tech} />
+        </li>
+      ))
+    }
+  </Column>
+</Row>
+
+<Row paddedRight>
+  # Razones por las que valió el esfuerzo
+
+  El propósito detrás de este proyecto lo hizo realmente valioso. Mi madre tiene dificultades con sus finanzas y me pidió ayuda. Quería que tuviera la mejor aplicación disponible, pero las funciones esenciales estaban bloqueadas detrás de un muro de pago. En lugar de conformarme con esas limitaciones, decidí crear mi propia solución. Este proyecto no fue solo una excusa para practicar o mejorar como desarrollador, sino una forma de apoyar a mis seres queridos.
+</Row>

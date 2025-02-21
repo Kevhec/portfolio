@@ -1,0 +1,93 @@
+---
+title: 'Project - Budmin'
+comingSoon: true
+projectName: 'Budmin'
+excerpt: 'Personal finances tracker with recurrence system. Keep track of your money and your subscriptions.'
+description: 'Personal finances tracker with recurrence system. Keep track of your money and your subscriptions.'
+wasForClient: false
+logo: '@assets/images/logos/budmin.svg'
+stack: ["React", "Tailwind CSS", "React router", "Shadcn", "Node", "Express", "Sequelize", "Postgres SQL", "TypeScript"]
+mockup: '@assets/images/mockups/budmin/budmin-en_1.webp'
+mockupAlt: 'Budmin preview image'
+galleryImages: [
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_1.webp",
+    alt: "budmin-en site gallery image 1"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_2.webp",
+    alt: "budmin-en site gallery image 2"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_3.webp",
+    alt: "budmin-en site gallery image 3"
+  },
+  {
+    src: "@assets/images/mockups/budmin/budmin-en_4.webp",
+    alt: "ConstruelectricJV site gallery image 4"
+  },
+]
+---
+
+import Typography from '@components/Typography.astro';
+import Row from '@components/projectPage/Row.astro';
+import Column from '@components/projectPage/Column.astro';
+import List from '@components/projectPage/List.astro';
+import TechCard from '@components/TechCard.astro';
+import Gallery from '@components/projectPage/Gallery.astro';
+
+export const components = {
+  h1: (props) => <Typography as="h2" {...props} class="lora" />,
+  h2: (props) => <Typography as="h3" {...props} />,
+  h3: (props) => <Typography as="h4" {...props} />,
+  p: (props) => <Typography as="p" {...props} />,
+  ul: List,
+}
+
+export const {
+  title,
+  excerpt,
+  mockup,
+  mockupAlt,
+  demoLink,
+  stack,
+  wasForAClient,
+  galleryImages
+} = frontmatter
+
+<Row paddedRight>
+  # What makes this unique
+
+  This project was born out of the need to manage my mother's finances and help her become more conscious of her spending. Initially, I looked for an existing app that met my requirements but found that most were either paid or required a premium subscription to access the features I needed. This led me to the decision to build my own, tailored specifically to my needs while also challenging my development skills. And so, the project began.
+</Row>
+
+<Row evenColumns inverted>
+  <div>
+    <div>
+      # Why these technologies
+
+      To achieve my desired functionalities, I knew I had to implement both the backend and the frontend. Therefore, I chose familiar tools like **Node.js** and **Express.js** as the foundation for the backend and **React** for the frontend.
+      <br/>
+      Focusing on the frontend, given its dashboard nature, I opted for **React**—not only for its suitability but also as an opportunity to enhance my skills. I implemented a robust state management system using the **Context API** and the `useReducer` hook, creating modular actions for each context. For routing, I selected **React Router** due to its powerful capabilities and simple API, which allowed me to define clear paths and maintain modular, DRY-friendly code. For the UI, I leveraged the **Shadcn** component system, which impressed me with its high degree of customization and control, especially when handling form submissions and validations with its compatibility with `zod` and `react-hook-form`.
+      <br/>
+      Given that my experience with backend development was limited, I considered **Express.js** a good option to begin my learning journey. I leveraged its built-in router for handling routing and took advantage of its middleware-based system. Specifically, I used middlewares for tasks such as verifying *authentication*, validating data with **zod**, and controlling access to resources for database operations.
+      <br/>
+      For my database, I chose **Postgres SQL** due to its high popularity and diverse range of data types, and I used **Sequelize ORM** to simplify database operations with its comprehensive set of APIs. Additionally, I implemented a cron-based system using **node-cron** for managing subscription-based transactions and budgets, and I adopted the MVC (Model-View-Controller) architectural pattern for my codebase.
+    </div>
+  </div>
+  <Column subColumns={2} as='ul'>
+    {
+      stack.map(tech => (
+        <li>
+          <TechCard tech={tech} />
+        </li>
+      ))
+    }
+  </Column>
+</Row>
+
+<Row paddedRight>
+  # Things that made it worth it
+
+  The purpose behind this project made it truly worthwhile. My mother struggles with her finances and asked for my help. I wanted her to have the best app available, but the essential features were locked behind a paywall. Instead of settling for those limitations, I decided to create my own solution. This project wasn't just an excuse to practice or improve as a developer, it was a way to support my loved ones.
+</Row>
