@@ -1,0 +1,46 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
+type Variants =
+  (
+    | 'div'
+    | 'ul'
+    | 'ol'
+  ) &
+  HTMLTag;
+
+type Props<Tag extends Variants> = Polymorphic<{
+  as: Tag
+  subColumns?: number
+}>;
+
+const {
+  as: Tag,
+  subColumns,
+} = Astro.props;
+---
+<Tag
+  class:list={[
+    'project-column',
+    {
+      'project-column--subColumns': subColumns,
+    },
+  ]}
+  style=`
+    --subColumns: ${subColumns};
+  `
+>
+  <slot />
+</Tag>
+
+<style lang="scss">
+  .project-column {
+    list-style-type: none;
+    padding-left: 0;
+
+    &--subColumns {
+      display: grid;
+      grid-template-columns: repeat(var(--subColumns, 2), 1fr);
+    }
+  }
+</style>

@@ -1,14 +1,14 @@
 ---
-title: 'Project - ConstruelectricJV'
+title: 'Proyecto - Budmin'
+comingSoon: true
 projectName: 'Budmin'
-excerpt: 'Landing page for an electrical and plumbing company based in Chile.'
-description: 'ConstruelectricJV - Electrical and plumbing services company based in Chile.'
-wasForClient: true
+excerpt: 'Administrador de finanzas personales con sistema de recurrencia. Mantén el control de tu dinero y tus suscripciones.'
+description: 'Administrador de finanzas personales con sistema de recurrencia. Mantén el control de tu dinero y tus suscripciones.'
+wasForClient: false
 logo: '@assets/images/logos/budmin.svg'
-stack: ["HTML5", "CSS", "JavaScript"]
+stack: ["React", "Tailwind CSS", "React router", "Shadcn", "Node", "Express", "Sequelize", "Postgres SQL", "TypeScript"]
 mockup: '@assets/images/mockups/budmin/budmin-es_1.webp'
-mockupAlt: 'ConstruelectricJV preview image'
-demoLink: 'https://construelectricjv.com'
+mockupAlt: 'Vista previa de Budmin'
 galleryImages: [
   {
     src: "@assets/images/mockups/budmin/budmin-es_1.webp",
@@ -31,6 +31,7 @@ galleryImages: [
 
 import Typography from '@components/Typography.astro';
 import Row from '@components/projectPage/Row.astro';
+import Column from '@components/projectPage/Column.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
@@ -55,32 +56,36 @@ export const {
 } = frontmatter
 
 <Row paddedRight>
-  # What makes this unique
+  # Qué lo hace único
 
-  This was my first commercial project, so I hold it in high regard. Additionally, I had the opportunity to share my knowledge with a colleague during the site development process, which brings me satisfaction, as contributing to the knowledge of others enriches my soul.
-
-  Furthermore, I seized the chance to learn the basics of SEO in order to enhance the site's visibility, nurturing my passion for continuous learning.
+  Este proyecto nació de la necesidad de gestionar las finanzas de mi madre y ayudarla a ser más consciente de sus gastos. Inicialmente, busqué una aplicación existente que cumpliera con mis requisitos, pero descubrí que la mayoría eran de pago o requerían una suscripción premium para acceder a las funciones que necesitaba. Esto me llevó a tomar la decisión de construir mi propia aplicación, adaptada específicamente a mis necesidades y, al mismo tiempo, desafiando mis habilidades de desarrollo. Y así, el proyecto comenzó.
 </Row>
 
 <Row evenColumns inverted>
   <div>
-    <div>
-      # Why these technologies
+    # Por qué estas tecnologías
 
-      As mentioned earlier, this project was developed with the support of a colleague to whom I could share basic knowledge in web development. For this reason, I considered it prudent to choose a basic technological stack, yet following best practices to, even given the circumstances, deliver a professional product.
-    </div>
+    Para lograr las funcionalidades deseadas, sabía que debía implementar tanto el backend como el frontend. Por ello, elegí herramientas familiares como **Node.js** y **Express.js** como base para el backend, y **React** para el frontend.
+    <br/>
+    Enfocándome en el frontend, dado su carácter de dashboard, opté por **React** no solo por su idoneidad, sino también como una oportunidad para mejorar mis habilidades. Implementé un sistema de gestión de estado robusto utilizando la **Context API** y el hook `useReducer`, creando acciones modulares para cada contexto. Para el enrutamiento, seleccioné **React Router** debido a sus potentes capacidades y su API sencilla, lo que me permitió definir rutas claras y mantener un código modular y DRY-friendly. Para la UI, aproveché el sistema de componentes **Shadcn**, que me impresionó por su alto grado de personalización y control, especialmente al manejar envíos de formularios y validaciones gracias a su compatibilidad con `zod` y `react-hook-form`.
+    <br/>
+    Dado que mi experiencia con el desarrollo backend era limitada, consideré que **Express.js** era una buena opción para comenzar mi aprendizaje. Aproveché su sistema de enrutamiento integrado y su arquitectura basada en middlewares. En particular, utilicé middlewares para tareas como la verificación de *autenticación*, la validación de datos con **zod** y el control de acceso a recursos para operaciones en la base de datos.
+    <br/>
+    Para mi base de datos, elegí **Postgres SQL** debido a su alta popularidad y su amplia variedad de tipos de datos, y utilicé el **ORM Sequelize** para simplificar las operaciones con su completo conjunto de APIs. Además, implementé un sistema basado en cron con **node-cron** para gestionar transacciones y presupuestos basados en suscripciones, y por último adopté el patrón de arquitectura MVC (Modelo-Vista-Controlador) para la estructura de mi código.
   </div>
-  <div>
+  <Column subColumns={2} as='ul'>
     {
       stack.map(tech => (
-        <TechCard tech={tech} />
+        <li>
+          <TechCard tech={tech} />
+        </li>
       ))
     }
-  </div>
+  </Column>
 </Row>
 
 <Row paddedRight>
-  # Things that made it worth it
+  # Razones por las que valió el esfuerzo
 
-  The fact that it is my first commercial project filled me with enthusiasm, as it represented the first economic reward for doing what I am passionate about, something that, with a lot of effort, I have managed to learn. This motivates me to continue on this path, thereby gaining confidence in my knowledge.
+  El propósito detrás de este proyecto lo hizo realmente valioso. Mi madre tiene dificultades con sus finanzas y me pidió ayuda. Quería que tuviera la mejor aplicación disponible, pero las funciones esenciales estaban bloqueadas detrás de un muro de pago. En lugar de conformarme con esas limitaciones, decidí crear mi propia solución. Este proyecto no fue solo una excusa para practicar o mejorar como desarrollador, sino una forma de apoyar a mis seres queridos.
 </Row>

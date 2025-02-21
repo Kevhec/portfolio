@@ -1,8 +1,8 @@
 type Language = keyof typeof languages;
 
-type UITranslations = {
+interface UITranslations {
   [key: string]: string;
-};
+}
 
 type UI = {
   [lang in Language]: Partial<UITranslations>;
@@ -44,17 +44,18 @@ export const ui: UI = {
     'projects.mainCarousel.aria': 'Projects showcase carousel',
     'projects.mainCarousel.thumbnail.construelectricjv': 'Go to ConstruelectricJV slide',
     'projects.showcaseGallery.aria': 'Project gallery for',
-    'project.goBack': "Go to previous page",
+    'project.goBack': 'Go to previous page',
     'project.clientLabel': 'Client',
     'project.personalLabel': 'Personal',
     'project.galleryHeading': 'Gallery',
     'project.context.aria': 'Small currently selected project context',
     'projects.heading': "What I've worked on",
-    'projects.seeProjectLabel': "See project",
-    'technologies.heading': "Technologies",
-    'footer.heading': "Send me an email!",
+    'projects.seeProjectLabel': 'See project',
+    'technologies.heading': 'Technologies',
+    'footer.heading': 'Send me an email!',
     'SEO.title': 'Kevhec - Frontend developer',
     'SEO.description': "Passionate Frontend Developer in Colombia, creating websites with modern technologies. Let's collaborate for a user-centric, high-performance web experience!",
+    'under-development': 'Under development',
   },
   es: {
     'home.title': 'KevHec - Desarrollador frontend',
@@ -64,7 +65,7 @@ export const ui: UI = {
     'intro.introduction.2': 'Aspirante a defensor de la accesibilidad',
     'intro.introduction.3': 'Entusiasta del aprendizaje',
     'intro.getInTouch': 'Contactar',
-    'intro.getInTouch.subject': "¡Hey! Trabajemos juntos",
+    'intro.getInTouch.subject': '¡Hey! Trabajemos juntos',
     'intro.getInTouch.message': 'Tu increíble mensaje va aquí',
     'intro.linkedIn.label': 'Mi LinkedIn',
     'intro.github.label': 'My LinkedIn',
@@ -80,14 +81,15 @@ export const ui: UI = {
     'projects.mainCarousel.aria': 'Carrusel de exhibición de proyectos',
     'projects.mainCarousel.thumbnail.construelectricjv': 'Ir a la diapositiva de ConstruelectricJV',
     'projects.showcaseGallery.aria': 'Galería del proyecto',
-    'project.goBack': "Ir a la página anterior",
+    'project.goBack': 'Ir a la página anterior',
     'project.clientLabel': 'Cliente',
-    'projects.heading': "Mis proyectos",
-    'projects.seeProjectLabel': "Ver proyecto",
+    'projects.heading': 'Mis proyectos',
+    'projects.seeProjectLabel': 'Ver proyecto',
     'project.galleryHeading': 'Galería',
-    'technologies.heading': "Tecnologías",
-    'footer.heading': "¡Envíame un Email!",
+    'technologies.heading': 'Tecnologías',
+    'footer.heading': '¡Envíame un Email!',
     'SEO.title': 'Kevhec - Desarrollador frontend',
-    'SEO.description': "Desarrollador Frontend Colombiano, creando sitios web con tecnologías modernas. !Colaboremos en crear experiencias web centradas en el usuario y de alto rendimiento!"
+    'SEO.description': 'Desarrollador Frontend Colombiano, creando sitios web con tecnologías modernas. !Colaboremos en crear experiencias web centradas en el usuario y de alto rendimiento!',
+    'under-development': 'En desarrollo',
   },
 } as const;

@@ -1,5 +1,5 @@
 ---
-import type { HTMLTag, Polymorphic } from 'astro/types'
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
 type Variants =
   (
@@ -12,26 +12,26 @@ type Variants =
     | 'p'
     | 'span'
   ) &
-  HTMLTag
+  HTMLTag;
 
 type Weigth =
   | 'regular'
   | 'medium'
   | 'semibold'
-  | 'bold'
+  | 'bold';
 
 type Props<Tag extends Variants> = Polymorphic<{
   as: Tag,
   accent?: boolean,
   weight?: Weigth
-}>
+}>;
 
 const {
   as: Tag = 'p',
   accent,
   weight,
   ...props
-} = Astro.props
+} = Astro.props;
 
 ---
 
@@ -40,7 +40,7 @@ const {
   class:list={[
     Tag,
     weight,
-    { accent }
+    { accent },
   ]}
 >
   <slot />

@@ -31,6 +31,7 @@ galleryImages: [
 
 import Typography from '@components/Typography.astro';
 import Row from '@components/projectPage/Row.astro';
+import Column from '@components/projectPage/Column.astro';
 import List from '@components/projectPage/List.astro';
 import TechCard from '@components/TechCard.astro';
 import Gallery from '@components/projectPage/Gallery.astro';
@@ -70,13 +71,15 @@ export const {
       As mentioned earlier, this project was developed with the support of a colleague to whom I could share basic knowledge in web development. For this reason, I considered it prudent to choose a basic technological stack, yet following best practices to, even given the circumstances, deliver a professional product.
     </div>
   </div>
-  <div>
+  <Column subColumns={1} as='ul'>
     {
       stack.map(tech => (
-        <TechCard tech={tech} />
+        <li>
+          <TechCard tech={tech} />
+        </li>
       ))
     }
-  </div>
+  </Column>
 </Row>
 
 <Row paddedRight>

@@ -29,10 +29,7 @@
     "import/order": "off",
 
     /* Custom preferences */
-    "@typescript-eslint/consistent-indexed-object-style": [
-      "warn",
-      "index-signature" // Prevent ambiguity with Records & Tuples
-    ],
+    "@typescript-eslint/consistent-indexed-object-style": "off",
     "@typescript-eslint/consistent-type-definitions": "warn",
     "@typescript-eslint/method-signature-style": "error", // Force type safety
     "@typescript-eslint/no-empty-interface": [

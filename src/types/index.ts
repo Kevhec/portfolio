@@ -13,4 +13,4 @@ export type TechsList =
   | 'Node'
   | 'Postgres'
   | 'Sequelize'
-  | 'Express'
+  | 'Express';
