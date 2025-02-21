@@ -1,4 +1,7 @@
 ---
+import ChevronLeft from './variants/ChevronLeft.astro';
+import ChevronRight from './variants/ChevronRight.astro';
+import Express from './variants/Express.astro';
 import ExternalLink from './variants/ExternalLink.astro';
 import Firebase from './variants/Firebase.astro';
 import Git from './variants/Git.astro';
@@ -6,18 +9,14 @@ import Github from './variants/Github.astro';
 import JavaScript from './variants/JavaScript.astro';
 import LinkedIn from './variants/LinkedIn.astro';
 import Nextjs from './variants/Nextjs.astro';
+import Node from './variants/Node.astro';
+import Postgres from './variants/Postgres.astro';
 import React from './variants/React.astro';
 import RightArrow from './variants/RightArrow.astro';
 import Sass from './variants/Sass.astro';
+import Sequelize from './variants/Sequelize.astro';
 import Tailwind from './variants/Tailwind.astro';
 import TypeScript from './variants/TypeScript.astro';
-import ChevronLeft from './variants/ChevronLeft.astro';
-import ChevronRight from './variants/ChevronRight.astro';
-import Node from './variants/Node.astro';
-import Postgres from './variants/Postgres.astro';
-import Sequelize from './variants/Sequelize.astro';
-import Express from './variants/Express.astro';
-
 
 type Variant =
   | 'ExternalLink'
@@ -37,7 +36,7 @@ type Variant =
   | 'Node'
   | 'Postgres'
   | 'Sequelize'
-  | 'Express'
+  | 'Express';
 
 interface Props {
   variant: Variant
@@ -45,6 +44,7 @@ interface Props {
 
 const { variant } = Astro.props;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const iconMap: Record<Variant, any> = {
   ExternalLink,
   Firebase,
@@ -64,7 +64,7 @@ const iconMap: Record<Variant, any> = {
   Postgres,
   Sequelize,
   Express,
-}
+};
 
 const SelectedIcon = iconMap[variant];
 ---
