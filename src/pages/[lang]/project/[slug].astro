@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 
   const paths = projects.map((project) => {
     const [lang, slug] = project.id.split('/');
-    console.log(project.id);
+
     return {
       params: {
         lang,
@@ -19,8 +19,6 @@ export async function getStaticPaths() {
       props: { project },
     };
   });
-
-  console.log(paths);
 
   return paths;
 }

@@ -55,6 +55,7 @@ export const ui: UI = {
     'footer.heading': 'Send me an email!',
     'SEO.title': 'Kevhec - Frontend developer',
     'SEO.description': "Passionate Frontend Developer in Colombia, creating websites with modern technologies. Let's collaborate for a user-centric, high-performance web experience!",
+    'under-development': 'Under development',
   },
   es: {
     'home.title': 'KevHec - Desarrollador frontend',
@@ -89,5 +90,6 @@ export const ui: UI = {
     'footer.heading': '¡Envíame un Email!',
     'SEO.title': 'Kevhec - Desarrollador frontend',
     'SEO.description': 'Desarrollador Frontend Colombiano, creando sitios web con tecnologías modernas. !Colaboremos en crear experiencias web centradas en el usuario y de alto rendimiento!',
+    'under-development': 'En desarrollo',
   },
 } as const;

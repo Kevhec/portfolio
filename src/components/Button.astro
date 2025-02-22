@@ -6,7 +6,7 @@ type Variants =
     | 'a'
     | 'button'
   ) &
-  HTMLTag
+  HTMLTag;
 
 type Props<Tag extends Variants> = Polymorphic<{
   as: Tag
@@ -19,7 +19,7 @@ type Props<Tag extends Variants> = Polymorphic<{
   inline?: boolean
   variant?: 'dark' | 'light'
   font?: 'lora' | 'quicksand'
-}>
+}>;
 
 const {
   as: Tag,
@@ -43,7 +43,8 @@ const {
     'button',
     `button--${font}`,
     {
-      [`button--${variant}`]: variant && !(iconOnly || textOnly || noBorder),
+      [`button--${variant}`]: variant,
+      'button--decorated': !(iconOnly || textOnly || noBorder),
       'button--iconOnly': iconOnly,
       'button--positionAware': positionAware,
       'button--textOnly': textOnly,
@@ -58,10 +59,10 @@ const {
     positionAware && (
       <span
         class:list={[
-          "button__span",
+          'button__span',
           {
-            [`button__span--${variant}`]: variant
-          }
+            [`button__span--${variant}`]: variant,
+          },
         ]}
       />
     )
@@ -79,6 +80,8 @@ const {
     font-weight: 600;
     text-decoration: none;
     z-index: 10;
+    text-align: center;
+    justify-content: center;
 
     &:not(.button--iconOnly):not(.button--textOnly):not(.button--noBorder) {
       padding: rem(8) rem(16);
@@ -98,14 +101,18 @@ const {
       }
     }
 
+    &--decorated {
+      outline: 1px solid;
+    }
+
     &--light {
       color: $primary-light-beige;
-      outline: 1px solid $primary-light-beige;
+      outline-color:$primary-light-beige;
     }
-    
+
     &--dark {
       color: $primary-green;
-      outline: 1px solid $primary-green;
+      outline-color:$primary-green;
     }
 
     &--lora {
@@ -127,7 +134,6 @@ const {
       transition-duration: 0.4s, 0.4s;
       transition-timing-function: ease-in-out, ease-in-out;
       z-index: 9;
-      
       &--light {
         background-color: rgba(225, 230, 224, 0.2);
       }

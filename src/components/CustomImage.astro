@@ -20,14 +20,14 @@ const {
 
 const mobileImg = await getImage({
   src: mobileImgUrl,
-  format: "webp",
+  format: 'webp',
   width: 356,
   height: 200,
 });
 
 const desktopImg = await getImage({
   src: desktopImgUrl,
-  format: "webp",
+  format: 'webp',
   width: 535,
   height: 300,
 });
@@ -35,7 +35,7 @@ const desktopImg = await getImage({
 
 <picture
   class:list={[
-    { "w-full": wFull }
+    { 'w-full': wFull },
   ]}
 >
   <source media="(max-width: 799px)" srcset={mobileImg.src} />
@@ -44,7 +44,7 @@ const desktopImg = await getImage({
     src={desktopImg.src}
     alt={alt}
     class:list={[
-      { "w-full": wFull }
+      { 'w-full': wFull },
     ]}
     {...attrs}
   />

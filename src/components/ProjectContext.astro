@@ -1,8 +1,9 @@
 ---
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+import Button from './Button.astro';
 import Icon from './icon/Icon.astro';
 import Typography from './Typography.astro';
-import Button from './Button.astro';
 
 interface Props {
   projectName: string
@@ -18,11 +19,11 @@ const {
   projectName,
   excerpt,
   projectHref,
-  classes
+  classes,
 } = Astro.props;
 ---
 
-<div class:list={["project-context", classes]}>
+<div class:list={['project-context', classes]}>
   <div>
     <Typography as="h3" class="project-context__heading">
       {projectName}
@@ -41,18 +42,21 @@ const {
     <figure>
       <Icon variant='RightArrow' />
     </figure>
-    <span>{t("projects.seeProjectLabel")}</span>
+    <span>{t('projects.seeProjectLabel')}</span>
   </Button>
 </div>
 
 <style lang="scss">
   .project-context {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     color: $primary-green;
     background-color: $primary-light-beige;
     height: 100%;
     width: 100%;
     padding: rem(16);
-    border-radius: 0 0 8px 8px;
+    border-radius: 8px;
 
     @include mediaq($bp-tablet) {
       border-radius: 8px;
@@ -68,7 +72,7 @@ const {
     }
 
     &__excerpt {
-      margin-bottom: rem(4);
+      margin-bottom: rem(24);
     }
 
     &__link {

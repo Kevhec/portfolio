@@ -17,15 +17,15 @@ const {
 ---
 
 <section class:list={[
-    "project-row",
-    {
-      "project-row--paddedLeft": paddedLeft,
-      "project-row--paddedRight": paddedRight,
-      "project-row--evenColumns": evenColumns,
-      "project-row--inverted": inverted,
-      "project-row--centered": centered,
-    }
-  ]}
+  'project-row',
+  {
+    'project-row--paddedLeft': paddedLeft,
+    'project-row--paddedRight': paddedRight,
+    'project-row--evenColumns': evenColumns,
+    'project-row--inverted': inverted,
+    'project-row--centered': centered,
+  },
+]}
 >
   <slot />
 </section>
@@ -88,11 +88,9 @@ const {
       }
 
       > * {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
+        margin-inline: auto;
+        width: 100%;
+
         @include mediaq($bp-tablet) {
           gap: 1rem;
         }
@@ -101,10 +99,11 @@ const {
 
     &--inverted {
       @include mediaq($bp-tablet) {
-        grid-auto-flow: dense;
-        :last-child {
-          grid-column: 1 / 2;
-          grid-row: 1 / 2;
+        direction: rtl;
+        grid-auto-flow: column;
+
+        & * {
+          direction: ltr;
         }
       }
     }
