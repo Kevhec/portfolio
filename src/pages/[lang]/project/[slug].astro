@@ -1,16 +1,16 @@
 ---
-import Layout from '@layouts/Layout.astro';
 import Container from '@components/Container.astro';
-import { getCollection, render } from 'astro:content';
 import ProjectHeader from '@components/projectPage/ProjectHeader.astro';
 import Slider from '@components/Slider.astro';
+import Layout from '@layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
 
   const paths = projects.map((project) => {
     const [lang, slug] = project.id.split('/');
-    console.log(project.id)
+    console.log(project.id);
     return {
       params: {
         lang,
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     };
   });
 
-  console.log(paths)
+  console.log(paths);
 
   return paths;
 }
