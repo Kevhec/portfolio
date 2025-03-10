@@ -1,5 +1,7 @@
 type Language = keyof typeof languages;
 
+// Hello world
+
 interface UITranslations {
   [key: string]: string;
 }
