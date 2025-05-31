@@ -1,15 +1,13 @@
 ---
 import Button from './Button.astro';
-import Typography from './Typography.astro';
-import Download from './icon/variants/Download.astro'
 
-const {lang} = Astro.props
+const { lang } = Astro.props;
 ---
 
 <Button
   as='a'
   href={lang === 'en' ? '/Curriculum-en.pdf' : '/Curriculum-es.pdf'}
-  download="curriculum"
+  download={`Curriculum KevHec - ${lang}`}
   positionAware
   class={'downloadButton'}
 >
@@ -31,13 +29,13 @@ const {lang} = Astro.props
       gap: 4px;
       padding: 8px !important;
       aspect-ratio: 1 / 1;
-      
+
       /* #downloadIcon {
         width: 25px;
         height: 25px;
         transition: all 200ms ease-in;
       }
-      
+
       &:hover {
         #downloadArrow {
           animation-name: float;
@@ -63,6 +61,6 @@ const {lang} = Astro.props
         transform: translateY(-1px);
       } 100% {
         transform: translateY(0);
-      }  
+      }
     } */
 </style>
