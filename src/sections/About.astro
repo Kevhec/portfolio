@@ -1,12 +1,14 @@
 ---
-import Typography from '@components/Typography.astro';
-import { Image } from 'astro:assets';
 import portrait from '@assets/images/portrait.png';
 import Container from '@components/Container.astro';
+import Typography from '@components/Typography.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { Image } from 'astro:assets';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const age = new Date().getFullYear() - 2000;
 ---
 
 <section class="about">
@@ -17,7 +19,7 @@ const t = useTranslations(lang);
       </figure>
       <div class="about__text">
         <Typography as='p' >
-          {t('about.1')}<Typography as='span' weight='bold'>{t('about.2')}</Typography>{t('about.3')}<Typography as='span' weight='bold'>{t('about.4')}</Typography>{t('about.5')}<Typography as='span' weight='bold'>{t('about.6')}</Typography>{t('about.7')}<Typography as='span' weight='bold'>{t('about.8')}</Typography>
+          {t('about.1')} {age}{t('about.2')}<Typography as='span' weight='bold'>{t('about.3')}</Typography>{t('about.4')}<Typography as='span' weight='bold'>{t('about.5')}</Typography>{t('about.6')}<Typography as='span' weight='bold'>{t('about.7')}</Typography>{t('about.8')}<Typography as='span' weight='bold'>{t('about.9')}</Typography>
         </Typography>
       </div>
     </div>
@@ -29,7 +31,7 @@ const t = useTranslations(lang);
     background-color: $neutral-white;
     &__content {
       padding: rem(56) 0;
-      
+
       @include mediaq($bp-tablet) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
