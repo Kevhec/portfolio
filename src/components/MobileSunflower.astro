@@ -23,7 +23,7 @@ const { refElement, lang } = Astro.props;
     top: -60px;
     left: var(--xPos);
     transform: scale(.7);
-  
+
     @include mediaq($bp-small-pc) {
       display: none;
     }
@@ -45,7 +45,6 @@ const { refElement, lang } = Astro.props;
   const sunflowerWidth = sunflowerRect.width;
 
   const sunflowerRightOffset = pageLang === 'en' ? -8 : 10;
-  console.log({refElementWidth, refElementX})
 
   const sunflowerLeftPosition =
     refElementX

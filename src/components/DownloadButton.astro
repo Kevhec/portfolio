@@ -2,12 +2,14 @@
 import Button from './Button.astro';
 
 const { lang } = Astro.props;
+
+const documentName = lang === 'en' ? 'Kevin-Henao-Resume' : 'CV_Kevin_Henao';
 ---
 
 <Button
   as='a'
-  href={lang === 'en' ? '/Curriculum-en.pdf' : '/Curriculum-es.pdf'}
-  download={`Curriculum KevHec - ${lang}`}
+  href={`/resume/Curriculum-${lang}.pdf`}
+  download={`${documentName}`}
   positionAware
   class={'downloadButton'}
 >
